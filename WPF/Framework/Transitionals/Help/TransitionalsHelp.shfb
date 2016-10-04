@@ -1,0 +1,51 @@
+﻿<project schemaVersion="1.6.0.2">
+    <assemblies>
+        <assembly assemblyPath="..\bin\Debug\Transitionals.dll" xmlCommentsPath="..\bin\Debug\Transitionals.xml" commentsOnly="False" />
+    </assemblies>
+    <namespaceSummaries>
+        <namespaceSummaryItem name="" isDocumented="False" />
+        <namespaceSummaryItem name="Transitionals" isDocumented="True">The Transitionals namespace includes core components that are leveraged by transitional controls and applications that consume them. For example, this namespace includes the base classes Transition and Transition3D on which custom transitions can be defined.</namespaceSummaryItem>
+        <namespaceSummaryItem name="Transitionals.Controls" isDocumented="True">The Controls namespace includes the base controls that ship with Transitionals. These include TransitionElement, SldieShow, etc.</namespaceSummaryItem>
+        <namespaceSummaryItem name="Transitionals.Transitions" isDocumented="True">The Transitions namespace includes all of the “out of the box” transitions that come with the Transitionals framework.</namespaceSummaryItem>
+    </namespaceSummaries>
+    <additionalContent>
+        <contentItem sourcePath="..\Documentation\*.*" destPath="Documentation\" excludeItems="False" />
+    </additionalContent>
+    <ProjectSummary>Transitionals is a framework that allows more than one piece of graphical content to share the same workspace in an applications user interface. It does this by providing a set of controls and an extensible library of animations that allow the user to switch between these pieces of content dynamically at run time.</ProjectSummary>
+    <MissingTags>Remarks, AutoDocumentCtors</MissingTags>
+    <VisibleItems>InheritedMembers, InheritedFrameworkMembers, Protected, SealedProtected</VisibleItems>
+    <HtmlHelp1xCompilerPath path="" />
+    <HtmlHelp2xCompilerPath path="C:\Program Files (x86)\HTML Help Workshop\" />
+    <OutputPath>.\Help\</OutputPath>
+    <SandcastlePath path="" />
+    <WorkingPath path="" />
+    <CleanIntermediates>True</CleanIntermediates>
+    <KeepLogFile>True</KeepLogFile>
+    <HelpFileFormat>HtmlHelp1x</HelpFileFormat>
+    <PurgeDuplicateTopics>True</PurgeDuplicateTopics>
+    <CppCommentsFixup>False</CppCommentsFixup>
+    <FrameworkVersion>2.0.50727</FrameworkVersion>
+    <BinaryTOC>True</BinaryTOC>
+    <IncludeFavorites>False</IncludeFavorites>
+    <Preliminary>False</Preliminary>
+    <RootNamespaceContainer>False</RootNamespaceContainer>
+    <RootNamespaceTitle />
+    <HelpTitle>Transitionals</HelpTitle>
+    <HtmlHelpName>Transitionals</HtmlHelpName>
+    <Language>en-US</Language>
+    <CopyrightHref />
+    <CopyrightText />
+    <FeedbackEMailAddress />
+    <HeaderText />
+    <FooterText />
+    <ProjectLinkType>Local</ProjectLinkType>
+    <SdkLinkType>Msdn</SdkLinkType>
+    <SdkLinkTarget>Blank</SdkLinkTarget>
+    <PresentationStyle>Prototype</PresentationStyle>
+    <NamingMethod>Guid</NamingMethod>
+    <SyntaxFilters>Standard</SyntaxFilters>
+    <ShowFeedbackControl>False</ShowFeedbackControl>
+    <ContentPlacement>AboveNamespaces</ContentPlacement>
+    <ContentSiteMap path=".\TransitionalsHelp.sitemap" />
+    <TopicFileTransform path="" />
+</project>

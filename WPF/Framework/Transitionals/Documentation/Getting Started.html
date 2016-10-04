@@ -1,0 +1,452 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<!--
+This document is not meant to be read alone. It is intended to be supplimental content to the 
+code comments in this solution. This file is added as an AdditionalContent member in the Sandcasle 
+project which builds the help file for this library. You can find the Sandcastle project under the 
+Help folder in the Transitionals project.
+-->
+<head>
+    <title>Getting Started</title>
+</head>
+<body>
+
+    <p>
+        <img alt="" src="Images/TransitionalsSmall.jpg" /></p>
+    <p>
+        Transitionals is a framework that allows more than one piece of graphical 
+        content to share the same space in an applications user interface. It does 
+        this by providing a set of controls and an extensible library of animations that 
+        allow the user to switch between these pieces of content dynamically at run 
+        time.</p>
+
+<p>
+    An application that wishes to use transitions can start by defining a 
+    placeholder in the UI where shared content will be hosted. For the initial design 
+    any placeholder will do. A static image or even an empty panel is enough to get you 
+    started building the surrounding UI. When it&#39;s time to actually start hosting 
+    content you&#39;ll need to decide how that content will be shown and how it will be 
+    navigated. After these questions are answered, choose a transition-aware control 
+    to put in place of your temporary content.</p>
+<p>
+    Currently
+    Transitionals ships with only two controls out of the box: <see cref="Transitionals.Controls.TransitionElement">TransitionElement</see> and <see cref="Transitionals.Controls.Slideshow">Slideshow</see>. 
+    Other controls, like a Tab control for example, could also be created. We 
+    encourage the community to come up with other common navigation and presentation 
+    scenarios that can leverage transitions.</p>
+<p>
+    For the remainder of this getting started document we&#39;ll focus on leveraging
+    <see cref="Transitionals.Controls.TransitionElement">TransitionElement</see>. <b>
+    TransitionElement</b> has a <see cref="Transitionals.Controls.TransitionElement.Transition">Transition</see> property that can be used 
+    to specify a single transition that will occur whenever content changes. In the <see cref="Transitionals.Transitions">Transitions</see> 
+    namespace you&#39;ll find several transitions that can be instantiated and set to this 
+    property. You can also specify the transition in xaml:</p>
+<!--
+{\rtf1\ansi\ansicpg\lang1024\noproof65001\uc1 \deff0{\fonttbl{\f0\fnil\fcharset0\fprq1 Courier New;}}{\colortbl;??\red163\green21\blue21;\red255\green255\blue255;\red0\green0\blue255;\red255\green0\blue0;}??\fs20 \cf1             \cf3 &lt;\cf1 transc\cf3 :\cf1 TransitionElement\cf3 &gt;\par ??\cf1                 \cf3 &lt;\cf1 transc\cf3 :\cf1 TransitionElement.Transition\cf3 &gt;\par ??\cf1                     \cf3 &lt;\cf1 transt\cf3 :\cf1 RotateTransition\cf4  Angle\cf3 ="45" /&gt;\par ??\cf1                 \cf3 &lt;/\cf1 transc\cf3 :\cf1 TransitionElement.Transition\cf3 &gt;\par ??\cf1             \cf3 &lt;/\cf1 transc\cf3 :\cf1 TransitionElement\cf3 &gt;\par ??}
+-->
+<div style="font-family: Courier New; font-size: 10pt; color: black; background: white;">
+    <p style="margin: 0px;">
+        <span style="color: blue;">&lt;</span><span style="color: #a31515;">transc</span><span 
+            style="color: blue;">:</span><span style="color: #a31515;">TransitionElement</span><span 
+            style="color: blue;"> <span style="color: red;"> x</span>:<span style="color: red;">Name</span>=&quot;TransitionBox&quot;&gt;</span></p>
+    <p style="margin: 0px;">
+        <span style="color: #a31515;">&nbsp;&nbsp;&nbsp; </span>
+        <span style="color: blue;">&lt;</span><span style="color: #a31515;">transc</span><span 
+            style="color: blue;">:</span><span style="color: #a31515;">TransitionElement.Transition</span><span 
+            style="color: blue;">&gt;</span></p>
+    <p style="margin: 0px;">
+        <span style="color: #a31515;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
+        <span style="color: blue;">&lt;</span><span style="color: #a31515;">transt</span><span 
+            style="color: blue;">:</span><span style="color: #a31515;">RotateTransition</span><span 
+            style="color: red;"> Angle</span><span style="color: blue;">=&quot;45&quot; /&gt;</span></p>
+    <p style="margin: 0px;">
+        <span style="color: #a31515;">&nbsp;&nbsp;&nbsp; </span>
+        <span style="color: blue;">&lt;/</span><span style="color: #a31515;">transc</span><span 
+            style="color: blue;">:</span><span style="color: #a31515;">TransitionElement.Transition</span><span 
+            style="color: blue;">&gt;</span></p>
+    <p style="margin: 0px;">
+        <span style="color: blue;">&lt;/</span><span style="color: #a31515;">transc</span><span 
+            style="color: blue;">:</span><span style="color: #a31515;">TransitionElement</span><span 
+            style="color: blue;">&gt;</span></p>
+</div>
+<!--EndFragment-->
+</div>
+<!--EndFragment-->
+<p>
+    Notice in this example that the <see cref="Transitionals.Transitions.RotateTransition.Angle">Angle</see> property 
+    is explicitly set to 45°. This 
+    is entirely optional and overrides the default angle of 90°.</p>
+<p>
+    Once the <b>TransitionElement</b> has been added to the UI and a transition has 
+    been specified, you can begin supplying content to be displayed. This is 
+    accomplished by simply setting the <see cref="Transitionals.Controls.TransitionElement.Content">Content</see> property on <b>TransitionElement.</b> 
+    To do that, make sure you&#39;ve named your <b>TransitionElement</b> so that you can 
+    access it from your code-behind. In the example above you can see we&#39;ve named 
+    our <b>TransitionElement</b> <i>TransitionBox</i>.</p>
+<p>
+    Now let&#39;s assume for a moment that we created two different user controls at the 
+    top of our class and stored them for later use:</p>
+<!--
+{\rtf1\ansi\ansicpg\lang1024\noproof1252\uc1 \deff0{\fonttbl{\f0\fnil\fcharset0\fprq1 Courier New;}}{\colortbl;??\red0\green0\blue0;\red255\green255\blue255;\red43\green145\blue175;\red0\green0\blue255;}??\fs20             \cf3 RoutedEventArgs\cf0  userControlA = \cf4 new\cf0  \cf3 RoutedEventArgs\cf0 ();\par ??            \cf3 RoutedEventArgs\cf0  userControlB = \cf4 new\cf0  \cf3 RoutedEventArgs\cf0 ();\par ??}
+-->
+<div style="font-family: Courier New; font-size: 10pt; color: black; background: white;">
+    <p style="margin: 0px;">
+        <span style="color: #2b91af;">UserControlA</span> userControlA =
+        <span style="color: blue;">new</span>
+        <span style="color: #2b91af;">UserControlA</span>();</p>
+    <p style="margin: 0px;">
+        <span style="color: #2b91af;">UserControlB</span> userControlB =
+        <span style="color: blue;">new</span> <span style="color: #2b91af;">UserControlB</span>();</p>
+</div>
+<!--EndFragment-->
+<p>
+    We could add two buttons to our UI and allow the user to switch between the two 
+    controls like this:</p>
+<!--
+{\rtf1\ansi\ansicpg\lang1024\noproof1252\uc1 \deff0{\fonttbl{\f0\fnil\fcharset0\fprq1 Courier New;}}{\colortbl;??\red0\green0\blue0;\red255\green255\blue255;\red0\green0\blue255;\red43\green145\blue175;}??\fs20         \cf3 private\cf0  \cf3 void\cf0  AButton_Click(\cf3 object\cf0  sender, \cf4 RoutedEventArgs\cf0  e)\par ??        \{\par ??            TransitionBox.Content = CreateCell((\cf4 Style\cf0 )Resources[CellA]);\par ??        \}\par ??\par ??        \cf3 private\cf0  \cf3 void\cf0  BButton_Click(\cf3 object\cf0  sender, \cf4 RoutedEventArgs\cf0  e)\par ??        \{\par ??            TransitionBox.Content = CreateCell((\cf4 Style\cf0 )Resources[CellB]);\par ??        \}}
+-->
+<div style="font-family: Courier New; font-size: 10pt; color: black; background: white;">
+    <p style="margin: 0px;">
+        <span style="color: blue;">private</span> <span style="color: blue;">void</span> 
+        AButton_Click(<span style="color: blue;">object</span> sender,
+        <span style="color: #2b91af;">RoutedEventArgs</span> e)</p>
+    <p style="margin: 0px;">
+        {</p>
+    <p style="margin: 0px;">
+&nbsp;&nbsp;&nbsp; TransitionBox.Content = userControlA;</p>
+    <p style="margin: 0px;">
+        }</p>
+    <p style="margin: 0px;">
+        &nbsp;</p>
+    <p style="margin: 0px;">
+        <span style="color: blue;">private</span> <span style="color: blue;">void</span> 
+        BButton_Click(<span style="color: blue;">object</span> sender,
+        <span style="color: #2b91af;">RoutedEventArgs</span> e)</p>
+    <p style="margin: 0px;">
+        {</p>
+    <p style="margin: 0px;">
+&nbsp;&nbsp;&nbsp; TransitionBox.Content = userControlB;</p>
+    <p style="margin: 0px;">
+        }</p>
+</div>
+<!--EndFragment-->
+</div>
+<!--EndFragment-->
+<p>
+    If the user clicks the same button twice no transition will occur because the 
+    content is not actually changing. On the other hand, if userControlA is 
+    displayed and the user clicks &#39;BButton&#39; content will change and a transition 
+    will occur.</p>
+<p></p>
+    <p>
+        Another feature I&#39;d like to cover as part of getting started is what I 
+        call transition <i>strategies</i>. In addition to the
+<see cref="Transitionals.Controls.TransitionElement.Transition">Transition</see> 
+        property, each control that supports transitions also has a <see cref="Transitionals.Controls.TransitionElement.TransitionSelector">TransitionSelector</see> property. 
+        This property works similarly to the way
+        <a href="http://msdn2.microsoft.com/en-us/library/system.windows.controls.itemscontrol.itemtemplateselector.aspx">
+        ItemTemplateSelector</a> works on an
+        <a href="http://msdn2.microsoft.com/en-us/library/system.windows.controls.itemscontrol.aspx">
+        ItemsControl</a>. In other words, each time a transition needs to occur you can 
+        use your own custom code to supply the transition to run. You do this by 
+        creating your own class that inherits from
+<see cref="Transitionals.TransitionSelector">TransitionSelector</see>. <b>TransitionSelector</b> has one method, 
+        <see cref="Transitionals.TransitionSelector.SelectTransition">SelectTransition</see>, that you must 
+        override. Here is the <b>SelectTransition</b> signature:</p>
+<!--
+{\rtf1\ansi\ansicpg\lang1024\noproof1252\uc1 \deff0{\fonttbl{\f0\fnil\fcharset0\fprq1 Courier New;}}{\colortbl;??\red0\green0\blue0;\red255\green255\blue255;\red0\green0\blue255;\red43\green145\blue175;}??\fs20         \cf3 public\cf0  \cf3 virtual\cf0  \cf4 Transition\cf0  SelectTransition(\cf3 object\cf0  oldContent, \cf3 object\cf0  newContent)\par ??}
+-->
+<div style="font-family: Courier New; font-size: 10pt; color: black; background: white;">
+    <p style="margin: 0px;">
+        <span style="color: blue;">public</span> <span style="color: blue;">virtual</span>
+        <span style="color: #2b91af;">Transition</span> SelectTransition(<span 
+            style="color: blue;">object</span> oldContent, <span style="color: blue;">
+        object</span> newContent)</p>
+</div>
+<!--EndFragment-->
+<p>
+        As you can see, a transition selector is passed the old content and the new 
+        content and is expected to return a <b>Transition</b> to perform. It&#39;s worth 
+        noting that <span style="color: blue;">null</span> (Nothing in VB) can be 
+        returned and no transition will occur. Instead, new content will immediately 
+        replace old content.</p>
+<p>
+        In building samples and applications with the Transitionals framework, one 
+        strategy we bumped into quite a bit is the desire to select a random 
+        transition each time one should occur. To meet this need we created 
+        <see cref="Transitionals.RandomTransitionSelector">RandomTransitionSelector</see>. 
+        <b>RandomTransitionSelector</b> allows you to supply a list of transitions along 
+        with their configuration and each time a transition occurs, one is required 
+        randomly selected from the supplied list. <b>RandomTransitionSelector</b> can be 
+        used like this:</p>
+<!--
+{\rtf1\ansi\ansicpg\lang1024\noproof65001\uc1 \deff0{\fonttbl{\f0\fnil\fcharset0\fprq1 Courier New;}}{\colortbl;??\red163\green21\blue21;\red255\green255\blue255;\red0\green0\blue255;\red255\green0\blue0;}??\fs20 \cf1     \tab \tab \cf3 &lt;\cf1 transc\cf3 :\cf1 Slideshow\cf4  IsSynchronizedWithCurrentItem\cf3 ="True"\cf4  ItemsSource\cf3 ="\{\cf1 Binding\cf3 \}"\cf4  x\cf3 :\cf4 Name\cf3 ="Slideshow"\cf4  AutoAdvance\cf3 ="True"\cf4  Background\cf3 ="#FF000000"\cf4  ItemTemplate\cf3 ="\{\cf1 StaticResource\cf4  ImageFileInfoTemplate\cf3 \}" &gt;\par ??\cf1                 \cf3 &lt;\cf1 transc\cf3 :\cf1 Slideshow.TransitionSelector\cf3 &gt;\par ??\cf1                     \cf3 &lt;\cf1 trans\cf3 :\cf1 RandomTransitionSelector\cf3 &gt;\par ??\cf1                         \cf3 &lt;\cf1 transt\cf3 :\cf1 DoorTransition\cf3 /&gt;\par ??\cf1                         \cf3 &lt;\cf1 transt\cf3 :\cf1 DotsTransition\cf3 /&gt;\par ??\cf1                         \cf3 &lt;\cf1 transt\cf3 :\cf1 RollTransition\cf3 /&gt;\par ??\cf1                         \cf3 &lt;\cf1 transt\cf3 :\cf1 RotateTransition\cf3 /&gt;\par ??\cf1                     \cf3 &lt;/\cf1 trans\cf3 :\cf1 RandomTransitionSelector\cf3 &gt;\par ??\cf1                 \cf3 &lt;/\cf1 transc\cf3 :\cf1 Slideshow.TransitionSelector\cf3 &gt;\par ??\cf1     \tab \tab \cf3 &lt;/\cf1 transc\cf3 :\cf1 Slideshow\cf3 &gt;\par ??}
+-->
+<div style="font-family: Courier New; font-size: 10pt; color: black; background: white;">
+    <p style="margin: 0px;">
+        <span style="color: blue;">&lt;</span><span style="color: #a31515;">transc</span><span 
+            style="color: blue;">:</span><span style="color: #a31515;">TransitionElement</span><span 
+            style="color: blue;"> <span style="color: red;"> x</span>:<span style="color: red;">Name</span>=&quot;TransitionBox&quot;&gt;</p>
+    <p style="margin: 0px;">
+        <span style="color: #a31515;">&nbsp;&nbsp;&nbsp; </span>
+        <span style="color: blue;">&lt;</span><span style="color: #a31515;">transc</span><span 
+            style="color: blue;">:<span style="color: #a31515;">TransitionElement</span></span><span style="color: #a31515;">.TransitionSelector</span><span 
+            style="color: blue;">&gt;</span></p>
+    <p style="margin: 0px;">
+        <span style="color: #a31515;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
+        <span style="color: blue;">&lt;</span><span style="color: #a31515;">trans</span><span 
+            style="color: blue;">:</span><span style="color: #a31515;">RandomTransitionSelector</span><span 
+            style="color: blue;">&gt;</span></p>
+    <p style="margin: 0px;">
+        <span style="color: #a31515;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </span><span style="color: blue;">&lt;</span><span style="color: #a31515;">transt</span><span 
+            style="color: blue;">:</span><span style="color: #a31515;">DoorTransition</span><span 
+            style="color: blue;">/&gt;</span></p>
+    <p style="margin: 0px;">
+        <span style="color: #a31515;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </span><span style="color: blue;">&lt;</span><span style="color: #a31515;">transt</span><span 
+            style="color: blue;">:</span><span style="color: #a31515;">DotsTransition</span><span 
+            style="color: blue;">/&gt;</span></p>
+    <p style="margin: 0px;">
+        <span style="color: #a31515;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </span><span style="color: blue;">&lt;</span><span style="color: #a31515;">transt</span><span 
+            style="color: blue;">:</span><span style="color: #a31515;">RotateTransition<span 
+            style="color: red;"> Angle</span><span style="color: blue;">=&quot;45&quot; /&gt;</span></span></p>
+    <p style="margin: 0px;">
+        <span style="color: #a31515;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </span><span style="color: blue;">&lt;</span><span style="color: #a31515;">transt</span><span 
+            style="color: blue;">:</span><span style="color: #a31515;">RollTransition</span><span 
+            style="color: blue;">/&gt;</span></p>
+    <p style="margin: 0px;">
+        <span style="color: #a31515;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
+        <span style="color: blue;">&lt;/</span><span style="color: #a31515;">trans</span><span 
+            style="color: blue;">:</span><span style="color: #a31515;">RandomTransitionSelector</span><span 
+            style="color: blue;">&gt;</span></p>
+    <p style="margin: 0px;">
+        <span style="color: #a31515;">&nbsp;&nbsp;&nbsp; </span>
+        <span style="color: blue;">&lt;/</span><span style="color: #a31515;">transc</span><span 
+            style="color: blue;">:<span style="color: #a31515;">TransitionElement</span></span><span style="color: #a31515;">.TransitionSelector</span><span 
+            style="color: blue;">&gt;</span></p>
+    <p style="margin: 0px;">
+        <span style="color: #a31515;">&lt;/TransitionElement</span>&gt;</p>
+    <p style="margin: 0px;">
+        &nbsp;</p>
+</div>
+<!--EndFragment-->
+
+</span>
+
+<p style="margin: 0px">
+    But what if you want to use every transition available in an assembly, or 
+    even multiple assemblies? Just add them using the <see cref="Transitionals.RandomTransitionSelector.TransitionAssemblies">TransitionAssemblies</see> property 
+    like this:</p>
+<p style="margin: 0px">
+    &nbsp;</p>
+<!--
+{\rtf1\ansi\ansicpg\lang1024\noproof65001\uc1 \deff0{\fonttbl{\f0\fnil\fcharset0\fprq1 Courier New;}}{\colortbl;??\red163\green21\blue21;\red255\green255\blue255;\red0\green0\blue255;\red255\green0\blue0;}??\fs20 \cf1                     \cf3 &lt;\cf1 trans\cf3 :\cf1 RandomTransitionSelector\cf3 &gt;\par ??\cf1                         \cf3 &lt;\cf1 trans\cf3 :\cf1 RandomTransitionSelector.TransitionAssemblies\cf3 &gt;\par ??\cf1                             \cf3 &lt;\cf1 refl\cf3 :\cf1 AssemblyName\cf4  Name\cf3 ="Transitionals" /&gt;\par ??\cf1                         \cf3 &lt;/\cf1 trans\cf3 :\cf1 RandomTransitionSelector.TransitionAssemblies\cf3 &gt;\par ??\cf1                         \cf3 &lt;\cf1 transt\cf3 :\cf1 RotateTransition\cf4  Angle\cf3 ="45" /&gt;\par ??\cf1                     \cf3 &lt;/\cf1 trans\cf3 :\cf1 RandomTransitionSelector\cf3 &gt;\par ??}
+-->
+<div style="font-family: Courier New; font-size: 10pt; color: black; background: white;">
+    <p style="margin: 0px;">
+        <span style="color: blue;">&lt;</span><span style="color: #a31515;">trans</span><span 
+            style="color: blue;">:</span><span style="color: #a31515;">RandomTransitionSelector</span><span 
+            style="color: blue;">&gt;</span></p>
+    <p style="margin: 0px;">
+        <span style="color: #a31515;">&nbsp;&nbsp;&nbsp; </span>
+        <span style="color: blue;">&lt;</span><span style="color: #a31515;">trans</span><span 
+            style="color: blue;">:</span><span style="color: #a31515;">RandomTransitionSelector.TransitionAssemblies</span><span 
+            style="color: blue;">&gt;</span></p>
+    <p style="margin: 0px;">
+        <span style="color: #a31515;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
+        <span style="color: blue;">&lt;</span><span style="color: #a31515;">refl</span><span 
+            style="color: blue;">:</span><span style="color: #a31515;">AssemblyName</span><span 
+            style="color: red;"> Name</span><span style="color: blue;">=&quot;Transitionals&quot; 
+        /&gt;</span></p>
+    <p style="margin: 0px;">
+        <span style="color: #a31515;">&nbsp;&nbsp;&nbsp; </span>
+        <span style="color: blue;">&lt;/</span><span style="color: #a31515;">trans</span><span 
+            style="color: blue;">:</span><span style="color: #a31515;">RandomTransitionSelector.TransitionAssemblies</span><span 
+            style="color: blue;">&gt;</span></p>
+    <p style="margin: 0px;">
+        <span style="color: blue;">&lt;/</span><span style="color: #a31515;">trans</span><span 
+            style="color: blue;">:</span><span style="color: #a31515;">RandomTransitionSelector</span><span 
+            style="color: blue;">&gt;</span></p>
+</div>
+<!--EndFragment-->
+<p style="margin: 0px">
+    &nbsp;</p>
+<p style="margin: 0px">
+    Note here that <span style="color: red;">Name</span> is an
+    <a href="http://msdn2.microsoft.com/en-us/library/k8xx4k69.aspx">assembly name</a>, 
+    so standard conventions apply. 
+    </p>
+<p style="margin: 0px">
+    &nbsp;</p>
+<p style="margin: 0px">
+    Now suppose you want to load up all the transitions available in an assembly but 
+    you need to specify some non-default values for one or two transitions. No 
+    problem, just list the ones you want to customize along with their settings like 
+    so:</p>
+<p style="margin: 0px">
+    &nbsp;</p>
+<!--
+{\rtf1\ansi\ansicpg\lang1024\noproof65001\uc1 \deff0{\fonttbl{\f0\fnil\fcharset0\fprq1 Courier New;}}{\colortbl;??\red163\green21\blue21;\red255\green255\blue255;\red0\green0\blue255;\red255\green0\blue0;}??\fs20 \cf1                     \cf3 &lt;\cf1 trans\cf3 :\cf1 RandomTransitionSelector\cf3 &gt;\par ??\cf1                         \cf3 &lt;\cf1 trans\cf3 :\cf1 RandomTransitionSelector.TransitionAssemblies\cf3 &gt;\par ??\cf1                             \cf3 &lt;\cf1 refl\cf3 :\cf1 AssemblyName\cf4  Name\cf3 ="Transitionals" /&gt;\par ??\cf1                         \cf3 &lt;/\cf1 trans\cf3 :\cf1 RandomTransitionSelector.TransitionAssemblies\cf3 &gt;\par ??\cf1                         \cf3 &lt;\cf1 transt\cf3 :\cf1 RotateTransition\cf4  Angle\cf3 ="45" /&gt;\par ??\cf1                     \cf3 &lt;/\cf1 trans\cf3 :\cf1 RandomTransitionSelector\cf3 &gt;\par ??}
+-->
+<div style="font-family: Courier New; font-size: 10pt; color: black; background: white;">
+    <p style="margin: 0px;">
+        <span style="color: blue;">&lt;</span><span style="color: #a31515;">trans</span><span 
+            style="color: blue;">:</span><span style="color: #a31515;">RandomTransitionSelector</span><span 
+            style="color: blue;">&gt;</span></p>
+    <p style="margin: 0px;">
+        <span style="color: #a31515;">&nbsp;&nbsp;&nbsp; </span>
+        <span style="color: blue;">&lt;</span><span style="color: #a31515;">trans</span><span 
+            style="color: blue;">:</span><span style="color: #a31515;">RandomTransitionSelector.TransitionAssemblies</span><span 
+            style="color: blue;">&gt;</span></p>
+    <p style="margin: 0px;">
+        <span style="color: #a31515;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
+        <span style="color: blue;">&lt;</span><span style="color: #a31515;">refl</span><span 
+            style="color: blue;">:</span><span style="color: #a31515;">AssemblyName</span><span 
+            style="color: red;"> Name</span><span style="color: blue;">=&quot;Transitionals&quot; 
+        /&gt;</span></p>
+    <p style="margin: 0px;">
+        <span style="color: #a31515;">&nbsp;&nbsp;&nbsp; </span>
+        <span style="color: blue;">&lt;/</span><span style="color: #a31515;">trans</span><span 
+            style="color: blue;">:</span><span style="color: #a31515;">RandomTransitionSelector.TransitionAssemblies</span><span 
+            style="color: blue;">&gt;</span></p>
+    <p style="margin: 0px;">
+        <span style="color: #a31515;">&nbsp;&nbsp;&nbsp; </span>
+        <span style="color: blue;">&lt;</span><span style="color: #a31515;">transt</span><span 
+            style="color: blue;">:</span><span style="color: #a31515;">RotateTransition</span><span 
+            style="color: red;"> Angle</span><span style="color: blue;">=&quot;45&quot; /&gt;</span></p>
+    <p style="margin: 0px;">
+        <span style="color: blue;">&lt;/</span><span style="color: #a31515;">trans</span><span 
+            style="color: blue;">:</span><span style="color: #a31515;">RandomTransitionSelector</span><span 
+            style="color: blue;">&gt;</span></p>
+</div>
+<!--EndFragment-->
+<p style="margin: 0px">
+    &nbsp;</p>
+<p style="margin: 0px">
+    Whenever <b>RandomTransitionSelector</b> loads a transition from an assembly it 
+    checks to see if you&#39;ve already added that particular transition. If you have, it 
+    won&#39;t try to add it again. So if you want to add two or more copies of a 
+    particular transition with different settings, you can add two or more entries 
+    to the list:</p>
+<p style="margin: 0px">
+    &nbsp;</p>
+<div style="font-family: Courier New; font-size: 10pt; color: black; background: white;">
+    <p style="margin: 0px;">
+        <span style="color: blue;">&lt;</span><span style="color: #a31515;">trans</span><span 
+            style="color: blue;">:</span><span style="color: #a31515;">RandomTransitionSelector</span><span 
+            style="color: blue;">&gt;</span></p>
+    <p style="margin: 0px;">
+        <span style="color: #a31515;">&nbsp;&nbsp;&nbsp; </span>
+        <span style="color: blue;">&lt;</span><span style="color: #a31515;">trans</span><span 
+            style="color: blue;">:</span><span style="color: #a31515;">RandomTransitionSelector.TransitionAssemblies</span><span 
+            style="color: blue;">&gt;</span></p>
+    <p style="margin: 0px;">
+        <span style="color: #a31515;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
+        <span style="color: blue;">&lt;</span><span style="color: #a31515;">refl</span><span 
+            style="color: blue;">:</span><span style="color: #a31515;">AssemblyName</span><span 
+            style="color: red;"> Name</span><span style="color: blue;">=&quot;Transitionals&quot; 
+        /&gt;</span></p>
+    <p style="margin: 0px;">
+        <span style="color: #a31515;">&nbsp;&nbsp;&nbsp; </span>
+        <span style="color: blue;">&lt;/</span><span style="color: #a31515;">trans</span><span 
+            style="color: blue;">:</span><span style="color: #a31515;">RandomTransitionSelector.TransitionAssemblies</span><span 
+            style="color: blue;">&gt;</span></p>
+    <p style="margin: 0px;">
+        <span style="color: #a31515;">&nbsp;&nbsp;&nbsp; </span>
+        <span style="color: blue;">&lt;</span><span style="color: #a31515;">transt</span><span 
+            style="color: blue;">:</span><span style="color: #a31515;">RotateTransition</span><span 
+            style="color: red;"> Angle</span><span style="color: blue;">=&quot;45&quot; /&gt;</span></p>
+    <p style="margin: 0px;">
+        <span style="color: #a31515;">&nbsp;&nbsp;&nbsp; </span>
+        <span style="color: blue;">&lt;</span><span style="color: #a31515;">transt</span><span 
+            style="color: blue;">:</span><span style="color: #a31515;">RotateTransition</span><span 
+            style="color: red;"> Angle</span><span style="color: blue;">=&quot;25&quot; /&gt;</span></p>
+    <p style="margin: 0px;">
+        <span style="color: blue;">&lt;/</span><span style="color: #a31515;">trans</span><span 
+            style="color: blue;">:</span><span style="color: #a31515;">RandomTransitionSelector</span><span 
+            style="color: blue;">&gt;</span></p>
+</div>
+<!--EndFragment-->
+<p style="margin: 0px">
+    &nbsp;</p>
+<p style="margin: 0px">
+        Finally, since each transition can specify its own default duration, what if you want 
+        all of them to have the same duration? You can use the <see cref="Transitionals.RandomTransitionSelector.TransitionDuration">TransitionDuration</see> property like this:</p>
+<p style="margin: 0px">
+    &nbsp;</p>
+<!--
+{\rtf1\ansi\ansicpg\lang1024\noproof65001\uc1 \deff0{\fonttbl{\f0\fnil\fcharset0\fprq1 Courier New;}}{\colortbl;??\red163\green21\blue21;\red255\green255\blue255;\red0\green0\blue255;\red255\green0\blue0;}??\fs20 \cf1                     \cf3 &lt;\cf1 trans\cf3 :\cf1 RandomTransitionSelector\cf4  TransitionDuration\cf3 ="0:0:5"&gt;\par ??\cf1                         \cf3 &lt;\cf1 trans\cf3 :\cf1 RandomTransitionSelector.TransitionAssemblies\cf3 &gt;\par ??\cf1                             \cf3 &lt;\cf1 refl\cf3 :\cf1 AssemblyName\cf4  Name\cf3 ="Transitionals" /&gt;\par ??\cf1                         \cf3 &lt;/\cf1 trans\cf3 :\cf1 RandomTransitionSelector.TransitionAssemblies\cf3 &gt;\par ??\cf1                         \cf3 &lt;\cf1 transt\cf3 :\cf1 RotateTransition\cf4  Angle\cf3 ="45" /&gt;\par ??\cf1                     \cf3 &lt;/\cf1 trans\cf3 :\cf1 RandomTransitionSelector\cf3 &gt;\par ??}
+-->
+<div style="font-family: Courier New; font-size: 10pt; color: black; background: white;">
+    <p style="margin: 0px;">
+        <span style="color: blue;">&lt;</span><span style="color: #a31515;">trans</span><span 
+            style="color: blue;">:</span><span style="color: #a31515;">RandomTransitionSelector</span><span 
+            style="color: blue;"> </span><span><span 
+            style="color: red;"> <b>TransitionDuration</b></span><span 
+            style="color: blue;"><b>=&quot;0:0:5&quot;</b>&gt;</span></p>
+    <p style="margin: 0px;">
+        <span style="color: #a31515;">&nbsp;&nbsp;&nbsp; </span>
+        <span style="color: blue;">&lt;</span><span style="color: #a31515;">trans</span><span 
+            style="color: blue;">:</span><span style="color: #a31515;">RandomTransitionSelector.TransitionAssemblies</span><span 
+            style="color: blue;">&gt;</span></p>
+    <p style="margin: 0px;">
+        <span style="color: #a31515;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
+        <span style="color: blue;">&lt;</span><span style="color: #a31515;">refl</span><span 
+            style="color: blue;">:</span><span style="color: #a31515;">AssemblyName</span><span 
+            style="color: red;"> Name</span><span style="color: blue;">=&quot;Transitionals&quot; 
+        /&gt;</span></p>
+    <p style="margin: 0px;">
+        <span style="color: #a31515;">&nbsp;&nbsp;&nbsp; </span>
+        <span style="color: blue;">&lt;/</span><span style="color: #a31515;">trans</span><span 
+            style="color: blue;">:</span><span style="color: #a31515;">RandomTransitionSelector.TransitionAssemblies</span><span 
+            style="color: blue;">&gt;</span></p>
+    <p style="margin: 0px;">
+        <span style="color: blue;">&lt;/</span><span style="color: #a31515;">trans</span><span 
+            style="color: blue;">:</span><span style="color: #a31515;">RandomTransitionSelector</span><span 
+            style="color: blue;">&gt;</span></p>
+</div>
+<!--EndFragment-->
+<p style="margin: 0px">
+    &nbsp;</p>
+<p style="margin: 0px">
+        Using the Xaml above, <b>RandomTransitionSelector</b> will attempt to update the 
+        Duration property to 5 seconds right before the transition is returned to <b>TransitionElement</b>. 
+        Note that in the first release some transition don&#39;t allow their durations to be changed. 
+        This is a known issue and if the duration can&#39;t be changed the default 
+    value will be used instead.<p style="margin: 0px">
+    &nbsp;</p>
+<p style="margin: 0px">
+    That&#39;s iThat&#39;s it for this first release. If you&#39;d like to check out all the included 
+        transitions, run the TransitionTester sample. That sample will even let you load 
+        up your own transition assemblies and test them out too. If you&#39;d like to see a 
+        working example of using <b>RandomTransitionSelector</b>, check out the 
+        ImageViewer sample application. Please note that very large images currently 
+        don&#39;t transition as expected becase of the time it takes to load the image. 
+        We&#39;re looking into it.</p>
+<p style="margin: 0px">
+    &nbsp;</p>
+<p style="margin: 0px">
+    In the examples in this document the following namespace aliases were used:nbsp;</p>
+<!--
+{\rtf1\ansi\ansicpg\lang1024\noproof65001\uc1 \deff0{\fonttbl{\f0\fnil\fcharset0\fprq1 Courier New;}}{\colortbl;??\red255\green0\blue0;\red255\green255\blue255;\red0\green0\blue255;}??\fs20 \cf1 xmlns\cf3 :\cf1 trans\cf3 ="clr-namespace:Transitionals;assembly=Transitionals"\par ??\cf1 xmlns\cf3 :\cf1 transc\cf3 ="clr-namespace:Transitionals.Controls;assembly=Transitionals"\par ??\cf1 xmlns\cf3 :\cf1 transt\cf3 ="clr-namespace:Transitionals.Transitions;assembly=Transitionals"\par ??\cf1 xmlns\cf3 :\cf1 local\cf3 ="clr-namespace:ImageViewer"\par ??\cf1 xmlns\cf3 :\cf1 io\cf3 ="clr-namespace:System.IO;assembly=System"\par ??\cf1 xmlns\cf3 :\cf1 io2\cf3 ="clr-namespace:System.IO;assembly=mscorlib"\par ??\cf1 xmlns\cf3 :\cf1 refl\cf3 ="clr-namespace:System.Reflection;assembly=mscorlib"\par ??}
+-->
+<div style="font-family: Courier New; font-size: 10pt; color: black; background: white;">
+    <p style="margin: 0px;">
+        <span style="color: red;">xmlns</span><span style="color: blue;">:</span><span 
+            style="color: red;">trans</span><span style="color: blue;">=&quot;clr-namespace:Transitionals;assembly=Transitionals&quot;</span></p>
+    <p style="margin: 0px;">
+        <span style="color: red;">xmlns</span><span style="color: blue;">:</span><span 
+            style="color: red;">transc</span><span style="color: blue;">=&quot;clr-namespace:Transitionals.Controls;assembly=Transitionals&quot;</span></p>
+    <p style="margin: 0px;">
+        <span style="color: red;">xmlns</span><span style="color: blue;">:</span><span 
+            style="color: red;">transt</span><span style="color: blue;">=&quot;clr-namespace:Transitionals.Transitions;assembly=Transitionals&quot;</span></p>
+    <p style="margin: 0px;">
+        <span style="color: red;">xmlns</span><span style="color: blue;">:</span><span 
+            style="color: red;">refl</span><span style="color: blue;">=&quot;clr-namespace:System.Reflection;assembly=mscorlib&quot;</span></p>
+</div>
+<!--EndFragment-->
+</body>
+</html>

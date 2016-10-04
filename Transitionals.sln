@@ -1,0 +1,64 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E16A1E0D-D844-4E7A-A49B-C24197A9E96E}"
+	ProjectSection(SolutionItems) = preProject
+		Microsoft Public License (Ms-PL).txt = Microsoft Public License (Ms-PL).txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{2966072E-6B2D-404A-AA4E-71C57AABCD71}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{8CB63814-E4E9-4789-B52A-47BFBD57616D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Transitionals", "WPF\Framework\Transitionals\Transitionals.csproj", "{FC8A5D35-6B80-4DB1-8DA5-0271677967E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransitionTester", "WPF\Samples\TransitionTester\TransitionTester.csproj", "{1FF4601A-0641-4FC3-AD87-271DC8A35C36}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageViewer", "WPF\Samples\ImageViewer\ImageViewer.csproj", "{A5F6B80E-9202-434A-BE07-093E2656C6AA}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs06.codeplex.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = WPF\\Framework\\Transitionals\\Transitionals.csproj
+		SccProjectTopLevelParentUniqueName1 = Transitionals.sln
+		SccProjectName1 = WPF/Framework/Transitionals
+		SccLocalPath1 = WPF\\Framework\\Transitionals
+		SccProjectUniqueName2 = WPF\\Samples\\ImageViewer\\ImageViewer.csproj
+		SccProjectTopLevelParentUniqueName2 = Transitionals.sln
+		SccProjectName2 = WPF/Samples/ImageViewer
+		SccLocalPath2 = WPF\\Samples\\ImageViewer
+		SccProjectUniqueName3 = WPF\\Samples\\TransitionTester\\TransitionTester.csproj
+		SccProjectTopLevelParentUniqueName3 = Transitionals.sln
+		SccProjectName3 = WPF/Samples/TransitionTester
+		SccLocalPath3 = WPF\\Samples\\TransitionTester
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FC8A5D35-6B80-4DB1-8DA5-0271677967E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC8A5D35-6B80-4DB1-8DA5-0271677967E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC8A5D35-6B80-4DB1-8DA5-0271677967E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC8A5D35-6B80-4DB1-8DA5-0271677967E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FF4601A-0641-4FC3-AD87-271DC8A35C36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FF4601A-0641-4FC3-AD87-271DC8A35C36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FF4601A-0641-4FC3-AD87-271DC8A35C36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FF4601A-0641-4FC3-AD87-271DC8A35C36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5F6B80E-9202-434A-BE07-093E2656C6AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5F6B80E-9202-434A-BE07-093E2656C6AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5F6B80E-9202-434A-BE07-093E2656C6AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5F6B80E-9202-434A-BE07-093E2656C6AA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FC8A5D35-6B80-4DB1-8DA5-0271677967E3} = {2966072E-6B2D-404A-AA4E-71C57AABCD71}
+		{1FF4601A-0641-4FC3-AD87-271DC8A35C36} = {8CB63814-E4E9-4789-B52A-47BFBD57616D}
+		{A5F6B80E-9202-434A-BE07-093E2656C6AA} = {8CB63814-E4E9-4789-B52A-47BFBD57616D}
+	EndGlobalSection
+EndGlobal

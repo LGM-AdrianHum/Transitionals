@@ -1,0 +1,233 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FC8A5D35-6B80-4DB1-8DA5-0271677967E3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Transitionals</RootNamespace>
+    <AssemblyName>Transitionals</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\Shared\Transitionals.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;CODE_ANALYSIS;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Transitionals.XML</DocumentationFile>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Transitionals.XML</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Windows.Presentation">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\Shared\GlobalAssemblyInfo.cs">
+      <Link>Properties\GlobalAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Shared\VersionInfo.cs">
+      <Link>Properties\VersionInfo.cs</Link>
+    </Compile>
+    <Compile Include="Controls\Slideshow.xaml.cs">
+      <DependentUpon>Slideshow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SlideshowItem.cs" />
+    <Compile Include="Controls\SlideshowPanel.cs" />
+    <Compile Include="Controls\TransitionElement.cs" />
+    <Compile Include="Controls\TransitionEventArgs.cs" />
+    <Compile Include="InternalExtensions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RandomTransitionSelector.cs" />
+    <Compile Include="TraceSwitches.cs" />
+    <Compile Include="Transitions\CheckerboardTransition.xaml.cs">
+      <DependentUpon>CheckerboardTransition.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Transitions\DiagonalWipeTransition.xaml.cs">
+      <DependentUpon>DiagonalWipeTransition.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Transitions\DiamondsTransition.xaml.cs">
+      <DependentUpon>DiamondsTransition.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Transitions\DoorTransition.cs" />
+    <Compile Include="Transitions\DotsTransition.xaml.cs">
+      <DependentUpon>DotsTransition.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Transitions\DoubleRotateWipeTransition.xaml.cs">
+      <DependentUpon>DoubleRotateWipeTransition.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Transitions\ExplosionTransition.cs" />
+    <Compile Include="Transitions\FadeAndBlurTransition.xaml.cs">
+      <DependentUpon>FadeAndBlurTransition.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Transitions\FadeAndGrowTransition.xaml.cs">
+      <DependentUpon>FadeAndGrowTransition.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Transitions\FadeTransition.cs" />
+    <Compile Include="Transitions\FlipTransition.cs" />
+    <Compile Include="Transitions\HorizontalBlindsTransition.xaml.cs">
+      <DependentUpon>HorizontalBlindsTransition.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Transitions\HorizontalWipeTransition.xaml.cs">
+      <DependentUpon>HorizontalWipeTransition.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Transitions\MeltTransition.xaml.cs">
+      <DependentUpon>MeltTransition.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Transitions\PageTransition.cs" />
+    <Compile Include="Transitions\RollTransition.xaml.cs">
+      <DependentUpon>RollTransition.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Transitions\RotateTransition.cs" />
+    <Compile Include="Transitions\RotateWipeTransition.xaml.cs">
+      <DependentUpon>RotateWipeTransition.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Transitions\StarTransition.xaml.cs">
+      <DependentUpon>StarTransition.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Transitions\StoryboardTransition.cs" />
+    <Compile Include="Transition.cs" />
+    <Compile Include="Transition3D.cs" />
+    <Compile Include="TransitionConverter.cs" />
+    <Compile Include="TransitionSelector.cs" />
+    <Compile Include="Transitions\TranslateTransition.cs" />
+    <Compile Include="Transitions\TwoWayTransitionSelector.cs" />
+    <Compile Include="Transitions\VerticalBlindsTransition.xaml.cs">
+      <DependentUpon>VerticalBlindsTransition.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Transitions\VerticalWipeTransition.xaml.cs">
+      <DependentUpon>VerticalWipeTransition.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Controls\Slideshow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Transitions\CheckerboardTransition.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Transitions\DiagonalWipeTransition.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Transitions\DiamondsTransition.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Transitions\DotsTransition.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Transitions\DoubleRotateWipeTransition.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Transitions\FadeAndBlurTransition.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Transitions\FadeAndGrowTransition.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Transitions\HorizontalBlindsTransition.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Transitions\HorizontalWipeTransition.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Transitions\MeltTransition.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Transitions\RollTransition.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Transitions\RotateWipeTransition.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Transitions\StarTransition.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Transitions\VerticalBlindsTransition.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Transitions\VerticalWipeTransition.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Transitions\Images\star.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Shared\Transitionals.snk">
+      <Link>Transitionals.snk</Link>
+    </None>
+    <None Include="Documentation\Getting Started.html" />
+    <None Include="Help\TransitionalsHelp.sitemap" />
+    <None Include="Help\TransitionalsHelp.shfb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Documentation\Images\TransitionalsSmall.jpg" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

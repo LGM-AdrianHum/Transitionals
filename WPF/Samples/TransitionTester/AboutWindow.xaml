@@ -1,0 +1,56 @@
+<!-- License Revision: 0 Last Revised: 3/29/2006 8:21 AM
+*******************************************************************************
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+
+This file is licensed under the Microsoft Public License (Ms-PL). A copy of the Ms-PL should accompany this file. 
+If it does not, you can obtain a copy from: 
+
+http://www.microsoft.com/resources/sharedsource/licensingbasics/publiclicense.mspx
+*******************************************************************************
+License -->
+<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Class="TransitionTester.AboutWindow"
+    Width="280" Height="308" WindowStyle="None" Background="{x:Null}" AllowsTransparency="True" ResizeMode="NoResize" ShowInTaskbar="False" Title="About: TransitionTester" WindowStartupLocation="CenterOwner">
+    <Grid>
+            
+    	<Grid.RowDefinitions>
+    		<RowDefinition Height="0.219*"/>
+    		<RowDefinition Height="0.781*"/>
+    	</Grid.RowDefinitions>
+    	<Border BorderBrush="#FF000000" CornerRadius="0,0,0,22" x:Name="BackgroundRect" Grid.Row="1" BorderThickness="2,0,2,2">
+    		<Border.Background>
+    			<LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+    				<GradientStop Color="#FFFFFFFF" Offset="0.005"/>
+    				<GradientStop Color="#89FFFFFF" Offset="1"/>
+    			</LinearGradientBrush>
+    		</Border.Background>
+    	</Border>
+    	<Border BorderBrush="#FF000000" CornerRadius="0,22,0,0" x:Name="HeaderRect" BorderThickness="2,2,2,0">
+    		<Border.Background>
+    			<LinearGradientBrush EndPoint="0.492,1.11" StartPoint="0.5,-0.063">
+    				<GradientStop Color="#FF595959" Offset="0"/>
+    				<GradientStop Color="#FF484848" Offset="1"/>
+    			</LinearGradientBrush>
+    		</Border.Background>
+    	</Border>
+            
+    	<Button HorizontalAlignment="Right" Margin="0,0,17,19" x:Name="CloseButton" VerticalAlignment="Bottom" Width="63" Height="23" Content="_OK" Grid.Row="1" IsCancel="True" IsDefault="True" Click="OK_Click"/>
+    	<Label Margin="0,8,8,0" VerticalAlignment="Top" Height="55.948" Content="Transition Tester" FontFamily="Century Gothic" FontSize="32" FontStyle="Normal" FontWeight="Normal" Foreground="#FFFFFFFF" Grid.RowSpan="2"/>
+    	<TextBlock Margin="18,67,17,76" Grid.Row="1" Text="Originally created by Jared Bienz for Acropolis and ported to the Transitionals framework on 2/24/2008. Thanks again Acropolis team!" TextWrapping="Wrap" />
+    	<Rectangle Stroke="#FF000000" VerticalAlignment="Top" Height="12" Grid.Row="1">
+    		<Rectangle.Fill>
+    			<LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+    				<GradientStop Color="#E2F4D000" Offset="0.038"/>
+    				<GradientStop Color="#B1EEEACF" Offset="0.188"/>
+    				<GradientStop Color="#B1F8F74F" Offset="1"/>
+    				<GradientStop Color="#E2FFD900" Offset="0.346"/>
+    				<GradientStop Color="#B5E1B916" Offset="0.889"/>
+    				<GradientStop Color="#DAEAE80F" Offset="0.625"/>
+    			</LinearGradientBrush>
+    		</Rectangle.Fill>
+    	</Rectangle>
+            
+    </Grid>
+</Window>

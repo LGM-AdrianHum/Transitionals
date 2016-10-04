@@ -1,0 +1,62 @@
+<!-- License Revision: 0 Last Revised: 3/29/2006 8:21 AM
+*******************************************************************************
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+
+This file is licensed under the Microsoft Public License (Ms-PL). A copy of the Ms-PL should accompany this file. 
+If it does not, you can obtain a copy from: 
+
+http://www.microsoft.com/resources/sharedsource/licensingbasics/publiclicense.mspx
+*******************************************************************************
+License -->
+<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:trans="clr-namespace:Transitionals;assembly=Transitionals"
+    xmlns:transc="clr-namespace:Transitionals.Controls;assembly=Transitionals"
+    xmlns:transt="clr-namespace:Transitionals.Transitions;assembly=Transitionals"
+    xmlns:local="clr-namespace:ImageViewer"
+    xmlns:io="clr-namespace:System.IO;assembly=System"
+    xmlns:io2="clr-namespace:System.IO;assembly=mscorlib"
+    xmlns:refl="clr-namespace:System.Reflection;assembly=mscorlib"
+    x:Class="ImageViewer.Viewer"
+    Title="Image Viewer" Height="480" Width="640"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2006" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+	<Window.Resources>
+		<ObjectDataProvider x:Key="ImagesSource" d:IsDataSource="True" ObjectType="{x:Type io2:FileInfo}" />
+		<DataTemplate x:Key="ImageFileInfoTemplate" >
+			<Grid MinHeight="100" MinWidth="100" x:Name="ImageItemGrid">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="0.77*"/>
+					<RowDefinition Height="0.23*"/>
+				</Grid.RowDefinitions>
+				<Rectangle Fill="#FFD4D4D4" Stroke="#FF000000" RadiusX="10" RadiusY="10" Grid.RowSpan="2" x:Name="BackgroundRect"/>
+				<Grid Grid.Row="1" x:Name="ImageDetailsGrid">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="0.507*"/>
+						<RowDefinition Height="0.493*"/>
+					</Grid.RowDefinitions>
+					<Rectangle Fill="#FFA5A5A5" Stroke="#FF000000" RadiusX="5" RadiusY="5" Margin="4,4,4,4"/>
+					<Rectangle Margin="4,4,4,4" Fill="#FFA5A5A5" Stroke="#FF000000" RadiusX="5" RadiusY="5" Grid.Row="1"/>
+					<Label Content="{Binding Path=Name}" x:Name="FileNameLabel" Margin="4,4,4,4"/>
+					<Label Margin="4,4,4,4" x:Name="DateLabel" Content="{Binding Path=LastWriteTime}" Grid.Row="1"/>
+				</Grid>
+				<Image Margin="10,10,10,10" Source="{Binding Path=FullName}" />
+			</Grid>
+		</DataTemplate>
+	</Window.Resources>
+    <Grid DataContext="{Binding Source={StaticResource ImagesSource}}">
+    	<StackPanel Orientation="Horizontal">
+    		<ListBox IsSynchronizedWithCurrentItem="True" Width="200" ItemsSource="{Binding}"/>
+    		<transc:Slideshow IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding}" x:Name="Slideshow" AutoAdvance="True" Background="#FF000000" ItemTemplate="{StaticResource ImageFileInfoTemplate}" >
+                <transc:Slideshow.TransitionSelector>
+                    <trans:RandomTransitionSelector>
+                        <trans:RandomTransitionSelector.TransitionAssemblies>
+                            <refl:AssemblyName Name="Transitionals" />
+                        </trans:RandomTransitionSelector.TransitionAssemblies>
+                    </trans:RandomTransitionSelector>
+                </transc:Slideshow.TransitionSelector>
+    		</transc:Slideshow>
+    	</StackPanel>
+    </Grid>
+</Window>
