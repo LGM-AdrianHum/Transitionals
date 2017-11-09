@@ -34,17 +34,17 @@ namespace Transitionals
         /// <summary>
         /// Identifies the <see cref="TransitionDurationProperty"/> dependency property.
         /// </summary>
-        static public readonly DependencyProperty TransitionDurationProperty = DependencyProperty.Register("TransitionDurationProperty", typeof(Duration), typeof(RandomTransitionSelector), new FrameworkPropertyMetadata(Duration.Automatic, OnTransitionDurationChanged));
+        public static readonly DependencyProperty TransitionDurationProperty = DependencyProperty.Register("TransitionDurationProperty", typeof(Duration), typeof(RandomTransitionSelector), new FrameworkPropertyMetadata(Duration.Automatic, OnTransitionDurationChanged));
 
         /// <summary>
         /// Identifies the <see cref="TransitionAssembliesProperty"/> dependency property.
         /// </summary>
-        static public readonly DependencyProperty TransitionAssembliesProperty = DependencyProperty.Register("TransitionAssembliesProperty", typeof(ObservableCollection<AssemblyName>), typeof(RandomTransitionSelector), new FrameworkPropertyMetadata(new ObservableCollection<AssemblyName>(), FrameworkPropertyMetadataOptions.AffectsRender, OnTransitionAssembliesChanged));
+        public static readonly DependencyProperty TransitionAssembliesProperty = DependencyProperty.Register("TransitionAssembliesProperty", typeof(ObservableCollection<AssemblyName>), typeof(RandomTransitionSelector), new FrameworkPropertyMetadata(new ObservableCollection<AssemblyName>(), FrameworkPropertyMetadataOptions.AffectsRender, OnTransitionAssembliesChanged));
 
         /// <summary>
         /// Identifies the <see cref="TransitionsProperty"/> dependency property.
         /// </summary>
-        static public readonly DependencyProperty TransitionsProperty = DependencyProperty.Register("TransitionsProperty", typeof(ObservableCollection<Transition>), typeof(RandomTransitionSelector), new FrameworkPropertyMetadata(new ObservableCollection<Transition>(), FrameworkPropertyMetadataOptions.AffectsRender, OnTransitionsChanged));
+        public static readonly DependencyProperty TransitionsProperty = DependencyProperty.Register("TransitionsProperty", typeof(ObservableCollection<Transition>), typeof(RandomTransitionSelector), new FrameworkPropertyMetadata(new ObservableCollection<Transition>(), FrameworkPropertyMetadataOptions.AffectsRender, OnTransitionsChanged));
         #endregion // Constants
 
         #region Overrides / Event Handlers

@@ -265,7 +265,7 @@ namespace Transitionals.Controls
         /// <summary>
         /// Identifies the <see cref="TransitionsEnabled"/> dependency property.
         /// </summary>
-        static public readonly DependencyProperty TransitionsEnabledProperty = DependencyProperty.Register("TransitionsEnabled", typeof(bool), typeof(TransitionElement), new FrameworkPropertyMetadata(true, OnTransitionsEnabledChanged));
+        public static readonly DependencyProperty TransitionsEnabledProperty = DependencyProperty.Register("TransitionsEnabled", typeof(bool), typeof(TransitionElement), new FrameworkPropertyMetadata(true, OnTransitionsEnabledChanged));
 
         private static void OnTransitionsEnabledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {

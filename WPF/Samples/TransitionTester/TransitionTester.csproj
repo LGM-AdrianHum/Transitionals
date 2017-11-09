@@ -10,7 +10,7 @@
     <RootNamespace>TransitionTester</RootNamespace>
     <ApplicationIcon>Application.ico</ApplicationIcon>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>

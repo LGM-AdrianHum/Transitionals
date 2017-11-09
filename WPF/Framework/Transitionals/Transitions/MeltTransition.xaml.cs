@@ -33,7 +33,7 @@ namespace Transitionals.Transitions
     [ComVisible(false)]
     public class MeltTransition : StoryboardTransition
     {
-        static private MeltTransitionFrameworkElement frameworkElement = new MeltTransitionFrameworkElement();
+        private static MeltTransitionFrameworkElement frameworkElement = new MeltTransitionFrameworkElement();
 
         public MeltTransition()
         {

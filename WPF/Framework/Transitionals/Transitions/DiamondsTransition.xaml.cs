@@ -34,7 +34,7 @@ namespace Transitionals.Transitions
     [ComVisible(false)]
     public class DiamondsTransition : StoryboardTransition
     {
-        static private DiamondsTransitionFrameworkElement frameworkElement = new DiamondsTransitionFrameworkElement();
+        private static DiamondsTransitionFrameworkElement frameworkElement = new DiamondsTransitionFrameworkElement();
 
         public DiamondsTransition()
         {

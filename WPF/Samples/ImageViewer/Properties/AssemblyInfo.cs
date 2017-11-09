@@ -10,8 +10,6 @@ http://www.microsoft.com/resources/sharedsource/licensingbasics/publiclicense.ms
 ******************************************************************************/
 #endregion // License
 using System.Reflection;
-using System.Resources;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows;
 

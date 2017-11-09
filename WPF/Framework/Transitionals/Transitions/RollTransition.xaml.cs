@@ -34,7 +34,7 @@ namespace Transitionals.Transitions
     [ComVisible(false)]
     public class RollTransition : StoryboardTransition
     {
-        static private RollTransitionFrameworkElement frameworkElement = new RollTransitionFrameworkElement();
+        private static RollTransitionFrameworkElement frameworkElement = new RollTransitionFrameworkElement();
 
         static RollTransition()
         {

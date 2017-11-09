@@ -10,16 +10,7 @@ http://www.microsoft.com/resources/sharedsource/licensingbasics/publiclicense.ms
 ******************************************************************************/
 #endregion // License
 using System;
-using System.IO;
-using System.Net;
-using System.Security;
-using System.Security.Permissions;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Navigation;
 using System.Collections.ObjectModel;
 using System.Reflection;
 using Transitionals;
@@ -32,7 +23,7 @@ namespace TransitionTester
         /// <summary>
         /// Gets the typed instance of the current application.
         /// </summary>
-        static public App CurrentApp
+        public static App CurrentApp
         {
             get
             {

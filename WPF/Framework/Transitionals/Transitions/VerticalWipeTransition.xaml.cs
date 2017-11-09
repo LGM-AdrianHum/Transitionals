@@ -33,7 +33,7 @@ namespace Transitionals.Transitions
     [ComVisible(false)]
     public class VerticalWipeTransition : StoryboardTransition
     {
-        static private VerticalWipeTransitionFrameworkElement frameworkElement = new VerticalWipeTransitionFrameworkElement();
+        private static VerticalWipeTransitionFrameworkElement frameworkElement = new VerticalWipeTransitionFrameworkElement();
 
         public VerticalWipeTransition()
         {

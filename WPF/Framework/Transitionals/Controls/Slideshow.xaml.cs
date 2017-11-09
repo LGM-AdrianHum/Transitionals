@@ -29,10 +29,10 @@ namespace Transitionals.Controls
         /************************************************
 		 * Constants
 		 ***********************************************/
-        static public readonly DependencyProperty AutoAdvanceProperty = DependencyProperty.Register("AutoAdvanceProperty", typeof(bool), typeof(Slideshow), new FrameworkPropertyMetadata(false, OnAutoAdvanceChanged));
-        static public readonly DependencyProperty AutoAdvanceDurationProperty = DependencyProperty.Register("AutoAdvanceDurationProperty", typeof(Duration), typeof(Slideshow), new FrameworkPropertyMetadata(new Duration(TimeSpan.FromSeconds(3)), OnAutoAdvanceDurationChanged), ValidateAutoAdvanceDuration);
-        static public readonly DependencyProperty IsContinuousProperty = DependencyProperty.Register("IsContinuous", typeof(bool), typeof(Slideshow), new FrameworkPropertyMetadata(true, OnIsContinuousChanged));
-        static public readonly DependencyProperty ShuffleProperty = DependencyProperty.Register("Shuffle", typeof(bool), typeof(Slideshow), new FrameworkPropertyMetadata(false, OnShuffleChanged));
+        public static readonly DependencyProperty AutoAdvanceProperty = DependencyProperty.Register("AutoAdvanceProperty", typeof(bool), typeof(Slideshow), new FrameworkPropertyMetadata(false, OnAutoAdvanceChanged));
+        public static readonly DependencyProperty AutoAdvanceDurationProperty = DependencyProperty.Register("AutoAdvanceDurationProperty", typeof(Duration), typeof(Slideshow), new FrameworkPropertyMetadata(new Duration(TimeSpan.FromSeconds(3)), OnAutoAdvanceDurationChanged), ValidateAutoAdvanceDuration);
+        public static readonly DependencyProperty IsContinuousProperty = DependencyProperty.Register("IsContinuous", typeof(bool), typeof(Slideshow), new FrameworkPropertyMetadata(true, OnIsContinuousChanged));
+        public static readonly DependencyProperty ShuffleProperty = DependencyProperty.Register("Shuffle", typeof(bool), typeof(Slideshow), new FrameworkPropertyMetadata(false, OnShuffleChanged));
         public static readonly DependencyProperty TransitionProperty = DependencyProperty.Register("Transition", typeof(Transition), typeof(Slideshow), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender, OnTransitionChanged));
         public static readonly DependencyProperty TransitionSelectorProperty = DependencyProperty.Register("TransitionSelector", typeof(TransitionSelector), typeof(Slideshow), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender, OnTransitionSelectorChanged));
         #endregion // Constants
@@ -56,7 +56,7 @@ namespace Transitionals.Controls
         /************************************************
 		 * Internal Methods
 		 ***********************************************/
-        static private bool ValidateAutoAdvanceDuration(object value)
+        private static bool ValidateAutoAdvanceDuration(object value)
         {
             // It must be a duration
             if (!(value is Duration)) { return false; }

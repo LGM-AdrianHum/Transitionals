@@ -34,7 +34,7 @@ namespace Transitionals.Transitions
     [ComVisible(false)]
     public class RotateWipeTransition : StoryboardTransition
     {
-        static private RotateWipeTransitionFrameworkElement frameworkElement = new RotateWipeTransitionFrameworkElement();
+        private static RotateWipeTransitionFrameworkElement frameworkElement = new RotateWipeTransitionFrameworkElement();
 
         public RotateWipeTransition()
         {

@@ -33,7 +33,7 @@ namespace Transitionals.Transitions
     [ComVisible(false)]
     public class FadeAndBlurTransition : StoryboardTransition
     {
-        static private FadeAndBlurTransitionFrameworkElement frameworkElement = new FadeAndBlurTransitionFrameworkElement();
+        private static FadeAndBlurTransitionFrameworkElement frameworkElement = new FadeAndBlurTransitionFrameworkElement();
 
         static FadeAndBlurTransition()
         {

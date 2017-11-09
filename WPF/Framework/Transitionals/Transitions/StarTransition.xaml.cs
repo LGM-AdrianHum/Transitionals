@@ -33,7 +33,7 @@ namespace Transitionals.Transitions
     [ComVisible(false)]
     public class StarTransition : StoryboardTransition
     {
-        static private StarTransitionFrameworkElement frameworkElement = new StarTransitionFrameworkElement();
+        private static StarTransitionFrameworkElement frameworkElement = new StarTransitionFrameworkElement();
 
         public StarTransition()
         {

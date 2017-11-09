@@ -16,7 +16,7 @@ namespace Transitionals
     /// <summary>
     /// Provides trace level switches for various components of the framework.
     /// </summary>
-    static internal class TraceSwitches
+    internal static class TraceSwitches
     {
         private static TraceSwitch transitionsSw;
 
@@ -24,7 +24,7 @@ namespace Transitionals
         /// Defines a trace switch for the transitions themselves.
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        static public TraceSwitch Transitions
+        public static TraceSwitch Transitions
         {
             get
             {

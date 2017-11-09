@@ -10,19 +10,10 @@ http://www.microsoft.com/resources/sharedsource/licensingbasics/publiclicense.ms
 ******************************************************************************/
 #endregion // License
 using System;
-using System.IO;
-using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Navigation;
-using System.Windows.Markup;
-using System.Xml;
-using System.Reflection;
 using Transitionals;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using Microsoft.Win32;
 
@@ -107,7 +98,7 @@ namespace TransitionTester
         private void BrowseLoadTransitions()
         {
             // Create the browser
-            OpenFileDialog ofd = new OpenFileDialog();
+            var ofd = new OpenFileDialog();
             ofd.Filter = "Assemblies (*.dll, *.exe)|*.dll;*.exe|All files (*.*)|*.*";
             ofd.Multiselect = true;
 

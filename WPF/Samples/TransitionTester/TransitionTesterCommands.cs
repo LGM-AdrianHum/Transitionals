@@ -9,10 +9,7 @@ If it does not, you can obtain a copy from:
 http://www.microsoft.com/resources/sharedsource/licensingbasics/publiclicense.mspx
 ******************************************************************************/
 #endregion // License
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+
 using System.Windows.Input;
 
 namespace TransitionTester
@@ -20,7 +17,7 @@ namespace TransitionTester
     /// <summary>
     /// Commands for the TransitionTester application not provided by the framework.
     /// </summary>
-    static public class TransitionTesterCommands
+    public static class TransitionTesterCommands
     {
         private static RoutedUICommand about = null;
         private static RoutedUICommand exit = null;

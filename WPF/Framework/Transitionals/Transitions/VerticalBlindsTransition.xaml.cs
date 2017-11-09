@@ -33,7 +33,7 @@ namespace Transitionals.Transitions
     [ComVisible(false)]
     public class VerticalBlindsTransition : StoryboardTransition
     {
-        static private VerticalBlindsTransitionFrameworkElement frameworkElement = new VerticalBlindsTransitionFrameworkElement();
+        private static VerticalBlindsTransitionFrameworkElement frameworkElement = new VerticalBlindsTransitionFrameworkElement();
 
         public VerticalBlindsTransition()
         {

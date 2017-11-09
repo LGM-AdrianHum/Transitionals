@@ -33,7 +33,7 @@ namespace Transitionals.Transitions
     [ComVisible(false)]
     public class CheckerboardTransition : StoryboardTransition
     {
-        static private CheckerboardTransitionFrameworkElement frameworkElement = new CheckerboardTransitionFrameworkElement();
+        private static CheckerboardTransitionFrameworkElement frameworkElement = new CheckerboardTransitionFrameworkElement();
 
         public CheckerboardTransition()
         {

@@ -22,13 +22,14 @@ namespace Transitionals
         /// <summary>
         /// Determines if an item of the specified type exists within the collection.
         /// </summary>
+        /// <param name="list"></param>
         /// <param name="type">
         /// The type to search for.
         /// </param>
         /// <returns>
         /// <c>true</c> if an item of the specified type is found; otherwise <c>false</c>.
         /// </returns>
-        static public bool ContainsType(this IList list, Type type)
+        public static bool ContainsType(this IList list, Type type)
         {
             // If no items, skip
             if (list == null) return false;
@@ -58,7 +59,7 @@ namespace Transitionals
         /// <returns>
         /// <c>true</c> if the type can be created as <typeparamref name="T"/>.
         /// </returns>
-        static public bool IsCreatableAs<T>(this Type type)
+        public static bool IsCreatableAs<T>(this Type type)
         {
             // Validate parameters
             if (type==null) throw new ArgumentNullException("type");

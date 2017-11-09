@@ -34,7 +34,7 @@ namespace Transitionals.Transitions
     [ComVisible(false)]
     public class DotsTransition : StoryboardTransition
     {
-        static private DotsTransitionFrameworkElement frameworkElement = new DotsTransitionFrameworkElement();
+        private static DotsTransitionFrameworkElement frameworkElement = new DotsTransitionFrameworkElement();
 
         public DotsTransition()
         {

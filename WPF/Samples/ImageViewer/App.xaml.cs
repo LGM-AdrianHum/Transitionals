@@ -9,16 +9,8 @@ If it does not, you can obtain a copy from:
 http://www.microsoft.com/resources/sharedsource/licensingbasics/publiclicense.mspx
 ******************************************************************************/
 #endregion // License
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
+
 using System.Windows;
-using System.IO;
-using System.Collections.ObjectModel;
-using System.Windows.Threading;
-using System.Threading;
 
 namespace ImageViewer
 {
