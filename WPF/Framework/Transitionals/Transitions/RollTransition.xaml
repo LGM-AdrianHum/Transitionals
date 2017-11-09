@@ -10,20 +10,19 @@ http://www.microsoft.com/resources/sharedsource/licensingbasics/publiclicense.ms
 *******************************************************************************
 License -->
 <FrameworkElement x:Class="Transitionals.Transitions.RollTransitionFrameworkElement"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    >
-  <FrameworkElement.Resources>
-    <Style x:Key="RollTransitionOldContentStyle" TargetType="ContentPresenter">
-      <Setter Property="RenderTransformOrigin" Value="0,1"/>
-      <Setter Property="RenderTransform">
-        <Setter.Value>
-          <RotateTransform/>
-        </Setter.Value>
-      </Setter>
-    </Style>
-    <Storyboard x:Key="RollTransitionOldContentStoryboard">
-      <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Angle" From="0" To="-90"/>
-    </Storyboard>
-  </FrameworkElement.Resources>
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <FrameworkElement.Resources>
+        <Style x:Key="RollTransitionOldContentStyle" TargetType="ContentPresenter">
+            <Setter Property="RenderTransformOrigin" Value="0,1" />
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <RotateTransform />
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Storyboard x:Key="RollTransitionOldContentStoryboard">
+            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Angle" From="0" To="-90" />
+        </Storyboard>
+    </FrameworkElement.Resources>
 </FrameworkElement>

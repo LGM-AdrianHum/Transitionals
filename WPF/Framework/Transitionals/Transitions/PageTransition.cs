@@ -1,74 +1,85 @@
-#region License Revision: 0 Last Revised: 3/29/2006 8:21 AM
-/******************************************************************************
-Copyright (c) Microsoft Corporation.  All rights reserved.
+//  _____                     _ _   _                   _     
+// /__   \_ __ __ _ _ __  ___(_) |_(_) ___  _ __   __ _| |___ 
+//   / /\/ '__/ _` | '_ \/ __| | __| |/ _ \| '_ \ / _` | / __|
+//  / /  | | | (_| | | | \__ \ | |_| | (_) | | | | (_| | \__ \
+//  \/   |_|  \__,_|_| |_|___/_|\__|_|\___/|_| |_|\__,_|_|___/
+//                                                            
+// Module   : Transitionals/Transitionals/PageTransition.cs
+// Name     : Adrian Hum - adrianhum 
+// Created  : 2017-09-23-11:00 AM
+// Modified : 2017-11-10-7:45 AM
 
-
-This file is licensed under the Microsoft Public License (Ms-PL). A copy of the Ms-PL should accompany this file. 
-If it does not, you can obtain a copy from: 
-
-http://www.microsoft.com/resources/sharedsource/licensingbasics/publiclicense.mspx
-******************************************************************************/
-#endregion // License
 using System;
-using System.Windows.Media.Media3D;
+using System.Runtime.InteropServices;
 using System.Windows;
-using System.Windows.Threading;
 using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Input;
+using System.Windows.Media.Media3D;
+using System.Windows.Threading;
 using Transitionals.Controls;
 
 namespace Transitionals.Transitions
 {
-    // Cloth physics with extra constraints to the sides of the pages
-    [System.Runtime.InteropServices.ComVisible(false)]
+    /// <inheritdoc />
+    /// <summary>
+    ///     Cloth physics with extra constraints to the sides of the pages
+    /// </summary>
+    [ComVisible(false)]
     public class PageTransition : Transition3D
     {
+        /// <inheritdoc />
         public PageTransition()
         {
-            this.Duration = new Duration(TimeSpan.FromSeconds(2));
-            this.FieldOfView = 10;
-            this.ClipToBounds = true;
+            Duration = new Duration(TimeSpan.FromSeconds(2));
+            FieldOfView = 10;
+            ClipToBounds = true;
         }
 
-        protected override void BeginTransition3D(TransitionElement transitionElement, ContentPresenter oldContent, ContentPresenter newContent, Viewport3D viewport)
+        /// <inheritdoc />
+        /// <summary>
+        /// </summary>
+        /// <param name="transitionElement"></param>
+        /// <param name="oldContent"></param>
+        /// <param name="newContent"></param>
+        /// <param name="viewport"></param>
+        protected override void BeginTransition3D(TransitionElement transitionElement, ContentPresenter oldContent,
+            ContentPresenter newContent, Viewport3D viewport)
         {
             int xparticles = 10, yparticles = 10;
-            Size size = transitionElement.RenderSize;
+            var size = transitionElement.RenderSize;
 
             if (size.Width > size.Height)
-                yparticles = (int)(xparticles * size.Height / size.Width);
+                yparticles = (int) (xparticles * size.Height / size.Width);
             else
-                xparticles = (int)(yparticles * size.Width / size.Height);
+                xparticles = (int) (yparticles * size.Width / size.Height);
 
-            MeshGeometry3D mesh = CreateMesh(new Point3D(), new Vector3D(size.Width, 0, 0), new Vector3D(0, size.Height, 0), xparticles - 1, yparticles - 1, new Rect(0, 0, 1, 1));
-            Brush cloneBrush = CreateBrush(oldContent);
+            var mesh = CreateMesh(new Point3D(), new Vector3D(size.Width, 0, 0), new Vector3D(0, size.Height, 0),
+                xparticles - 1, yparticles - 1, new Rect(0, 0, 1, 1));
+            var cloneBrush = CreateBrush(oldContent);
             Material clone = new DiffuseMaterial(cloneBrush);
-            
+
 
             double ustep = size.Width / (xparticles - 1), vstep = size.Height / (yparticles - 1);
 
-            Point3DCollection points = mesh.Positions;
+            var points = mesh.Positions;
 
-            
-            Point3DCollection oldPoints = points.Clone();
 
-            double timeStep = 1.0 / 30.0;
-            DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(timeStep);
+            var oldPoints = points.Clone();
+
+            const double timeStep = 1.0 / 30.0;
+            var timer = new DispatcherTimer {Interval = TimeSpan.FromSeconds(timeStep)};
             double time = 0;
-            double duration = this.Duration.HasTimeSpan ? this.Duration.TimeSpan.TotalSeconds : 2;
+            var duration = Duration.HasTimeSpan ? Duration.TimeSpan.TotalSeconds : 2;
             timer.Tick += delegate
             {
                 time = time + timeStep;
-                Point mousePos = Mouse.GetPosition(viewport);
-                Point3D mousePos3D = new Point3D(mousePos.X, mousePos.Y, -10);
-                    
+                //var mousePos = Mouse.GetPosition(viewport);
+                //var mousePos3D = new Point3D(mousePos.X, mousePos.Y, -10);
+
                 // Cloth physics based on work of Thomas Jakobsen http://www.ioi.dk/~thomas
-                for (int i = 0; i < oldPoints.Count; i++)
+                for (var i = 0; i < oldPoints.Count; i++)
                 {
-                    Point3D currentPoint = points[i];
-                    Point3D newPoint = currentPoint + 0.9 * (currentPoint - oldPoints[i]);
+                    var currentPoint = points[i];
+                    var newPoint = currentPoint + 0.9 * (currentPoint - oldPoints[i]);
 
                     if (newPoint.Y > size.Height)
                         newPoint.Y = size.Height;
@@ -78,10 +89,10 @@ namespace Transitionals.Transitions
 
                 //for (int j = 0; j < 5; j++)
                 //for (int i = oldPoints.Count - 1; i > 0 ; i--)
-                for (int a = yparticles - 1; a >= 0; a--)
-                for (int b = xparticles - 1; b >= 0; b--)
+                for (var a = yparticles - 1; a >= 0; a--)
+                for (var b = xparticles - 1; b >= 0; b--)
                 {
-                    int i = b * yparticles + a;
+                    var i = b * yparticles + a;
                     // constrain with point to the left
                     if (i > yparticles)
                         Constrain(oldPoints, i, i - yparticles, ustep);
@@ -98,14 +109,13 @@ namespace Transitionals.Transitions
                     if (b == 0)
                         oldPoints[i] = new Point3D(0, a * size.Height / (yparticles - 1), 0);
 
-                    if (b == xparticles - 1)
-                    {
-                        double angle = time / duration * Math.PI / (0.8 + 0.5 * (yparticles - (double)a) / yparticles);
-                        oldPoints[i] = new Point3D(size.Width * Math.Cos(angle), a * size.Height / (yparticles - 1), -size.Width * Math.Sin(angle));
-                    }
+                    if (b != xparticles - 1) continue;
+                    var angle = time / duration * Math.PI / (0.8 + 0.5 * (yparticles - (double) a) / yparticles);
+                    oldPoints[i] = new Point3D(size.Width * Math.Cos(angle), a * size.Height / (yparticles - 1),
+                        -size.Width * Math.Sin(angle));
                 }
 
-                if (time > (duration - 0))
+                if (time > duration - 0)
                 {
                     timer.Stop();
                     EndTransition(transitionElement, oldContent, newContent);
@@ -117,12 +127,10 @@ namespace Transitionals.Transitions
                 points = mesh.Positions;
             };
             timer.Start();
-            
 
-            GeometryModel3D geo = new GeometryModel3D(mesh, clone);
-            geo.BackMaterial = clone;
-            ModelVisual3D model = new ModelVisual3D();
-            model.Content = geo;
+
+            var geo = new GeometryModel3D(mesh, clone) {BackMaterial = clone};
+            var model = new ModelVisual3D {Content = geo};
 
             // Replace old content in visual tree with new 3d model
             transitionElement.HideContent(oldContent);
@@ -132,9 +140,9 @@ namespace Transitionals.Transitions
         private static void Constrain(Point3DCollection points, int i1, int i2, double length)
         {
             Point3D p1 = points[i1], p2 = points[i2];
-            Vector3D delta = p2 - p1;
-            double deltalength = delta.Length;
-            double diff = (deltalength - length) / deltalength;
+            var delta = p2 - p1;
+            var deltalength = delta.Length;
+            var diff = (deltalength - length) / deltalength;
             p1 += delta * 0.5 * diff;
             p2 -= delta * 0.5 * diff;
 

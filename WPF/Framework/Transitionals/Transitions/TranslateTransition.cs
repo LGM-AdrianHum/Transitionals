@@ -1,15 +1,17 @@
-#region License Revision: 0 Last Revised: 3/29/2006 8:21 AM
-/******************************************************************************
-Copyright (c) Microsoft Corporation.  All rights reserved.
+//  _____                     _ _   _                   _     
+// /__   \_ __ __ _ _ __  ___(_) |_(_) ___  _ __   __ _| |___ 
+//   / /\/ '__/ _` | '_ \/ __| | __| |/ _ \| '_ \ / _` | / __|
+//  / /  | | | (_| | | | \__ \ | |_| | (_) | | | | (_| | \__ \
+//  \/   |_|  \__,_|_| |_|___/_|\__|_|\___/|_| |_|\__,_|_|___/
+//                                                            
+// Module   : Transitionals/Transitionals/TranslateTransition.cs
+// Name     : Adrian Hum - adrianhum 
+// Created  : 2017-09-23-11:00 AM
+// Modified : 2017-11-10-7:46 AM
 
-
-This file is licensed under the Microsoft Public License (Ms-PL). A copy of the Ms-PL should accompany this file. 
-If it does not, you can obtain a copy from: 
-
-http://www.microsoft.com/resources/sharedsource/licensingbasics/publiclicense.mspx
-******************************************************************************/
-#endregion // License
 using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -21,69 +23,88 @@ namespace Transitionals.Transitions
     // Applies a Translation to the content.  You can specify the starting point of the new 
     // content or the ending point of the old content using relative coordinates.
     // Set start point to (-1,0) to have the content slide from the left 
-    [System.Runtime.InteropServices.ComVisible(false)]
+    /// <summary>
+    /// </summary>
+    [ComVisible(false)]
     public class TranslateTransition : Transition
     {
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty StartPointProperty =
+            DependencyProperty.Register("StartPoint", typeof(Point), typeof(TranslateTransition),
+                new UIPropertyMetadata(new Point()));
+
+        /// <summary>
+        /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "EndPoint")]
+        public static readonly DependencyProperty EndPointProperty =
+            DependencyProperty.Register("EndPoint", typeof(Point), typeof(TranslateTransition),
+                new UIPropertyMetadata(new Point()));
+
         static TranslateTransition()
         {
             ClipToBoundsProperty.OverrideMetadata(typeof(TranslateTransition), new FrameworkPropertyMetadata(true));
         }
 
+        /// <summary>
+        /// </summary>
         public TranslateTransition()
         {
-            this.Duration = new Duration(TimeSpan.FromSeconds(0.5));
-            this.StartPoint = new Point(-1, 0);
+            Duration = new Duration(TimeSpan.FromSeconds(0.5));
+            StartPoint = new Point(-1, 0);
         }
 
+        /// <summary>
+        /// </summary>
         public Point StartPoint
         {
-            get { return (Point)GetValue(StartPointProperty); }
+            get { return (Point) GetValue(StartPointProperty); }
             set { SetValue(StartPointProperty, value); }
         }
 
-        public static readonly DependencyProperty StartPointProperty =
-            DependencyProperty.Register("StartPoint", typeof(Point), typeof(TranslateTransition), new UIPropertyMetadata(new Point()));
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "EndPoint")]
+        /// <summary>
+        /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "EndPoint")]
         public Point EndPoint
         {
-            get { return (Point)GetValue(EndPointProperty); }
+            get { return (Point) GetValue(EndPointProperty); }
             set { SetValue(EndPointProperty, value); }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "EndPoint")]
-        public static readonly DependencyProperty EndPointProperty =
-            DependencyProperty.Register("EndPoint", typeof(Point), typeof(TranslateTransition), new UIPropertyMetadata(new Point()));
-
-        
-        protected internal override void BeginTransition(TransitionElement transitionElement, ContentPresenter oldContent, ContentPresenter newContent)
+        /// <summary>
+        /// </summary>
+        /// <param name="transitionElement"></param>
+        /// <param name="oldContent"></param>
+        /// <param name="newContent"></param>
+        protected internal override void BeginTransition(TransitionElement transitionElement,
+            ContentPresenter oldContent, ContentPresenter newContent)
         {
-            TranslateTransform tt = new TranslateTransform(StartPoint.X * transitionElement.ActualWidth, StartPoint.Y * transitionElement.ActualHeight);
+            var tt = new TranslateTransform(StartPoint.X * transitionElement.ActualWidth,
+                StartPoint.Y * transitionElement.ActualHeight);
 
-            if (this.IsNewContentTopmost)
-            {
+            if (IsNewContentTopmost)
                 newContent.RenderTransform = tt;
-            }
             else
-            {
                 oldContent.RenderTransform = tt;
-            }
 
-            DoubleAnimation da = new DoubleAnimation(EndPoint.X * transitionElement.ActualWidth, Duration);
+            var da = new DoubleAnimation(EndPoint.X * transitionElement.ActualWidth, Duration);
             tt.BeginAnimation(TranslateTransform.XProperty, da);
 
             da.To = EndPoint.Y * transitionElement.ActualHeight;
-            da.Completed += delegate
-            {
-                EndTransition(transitionElement, oldContent, newContent);
-            };
+            da.Completed += delegate { EndTransition(transitionElement, oldContent, newContent); };
             tt.BeginAnimation(TranslateTransform.YProperty, da);
         }
 
-        protected override void OnTransitionEnded(TransitionElement transitionElement, ContentPresenter oldContent, ContentPresenter newContent)
+        /// <summary>
+        /// </summary>
+        /// <param name="transitionElement"></param>
+        /// <param name="oldContent"></param>
+        /// <param name="newContent"></param>
+        protected override void OnTransitionEnded(TransitionElement transitionElement, ContentPresenter oldContent,
+            ContentPresenter newContent)
         {
-            newContent.ClearValue(ContentPresenter.RenderTransformProperty);
-            oldContent.ClearValue(ContentPresenter.RenderTransformProperty);
+            newContent.ClearValue(UIElement.RenderTransformProperty);
+            oldContent.ClearValue(UIElement.RenderTransformProperty);
         }
     }
 }

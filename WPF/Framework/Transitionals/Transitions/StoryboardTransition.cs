@@ -1,82 +1,105 @@
-#region License Revision: 0 Last Revised: 3/29/2006 8:21 AM
-/******************************************************************************
-Copyright (c) Microsoft Corporation.  All rights reserved.
+//  _____                     _ _   _                   _     
+// /__   \_ __ __ _ _ __  ___(_) |_(_) ___  _ __   __ _| |___ 
+//   / /\/ '__/ _` | '_ \/ __| | __| |/ _ \| '_ \ / _` | / __|
+//  / /  | | | (_| | | | \__ \ | |_| | (_) | | | | (_| | \__ \
+//  \/   |_|  \__,_|_| |_|___/_|\__|_|\___/|_| |_|\__,_|_|___/
+//                                                            
+// Module   : Transitionals/Transitionals/StoryboardTransition.cs
+// Name     : Adrian Hum - adrianhum 
+// Created  : 2017-09-23-11:00 AM
+// Modified : 2017-11-10-7:46 AM
 
-
-This file is licensed under the Microsoft Public License (Ms-PL). A copy of the Ms-PL should accompany this file. 
-If it does not, you can obtain a copy from: 
-
-http://www.microsoft.com/resources/sharedsource/licensingbasics/publiclicense.mspx
-******************************************************************************/
-#endregion // License
-using System.Windows.Media.Animation;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
-using System.Runtime.InteropServices;
+using System.Windows.Media.Animation;
 using Transitionals.Controls;
 
 namespace Transitionals.Transitions
 {
     // Transition with storyboards for the old and new content presenters
-    [StyleTypedProperty(Property="OldContentStyle", StyleTargetType=typeof(ContentPresenter))]
-    [StyleTypedProperty(Property="NewContentStyle", StyleTargetType=typeof(ContentPresenter))]
+    /// <summary>
+    /// </summary>
+    [StyleTypedProperty(Property = "OldContentStyle", StyleTargetType = typeof(ContentPresenter))]
+    [StyleTypedProperty(Property = "NewContentStyle", StyleTargetType = typeof(ContentPresenter))]
     [ComVisible(false)]
     public abstract class StoryboardTransition : Transition
     {
-        public Style OldContentStyle
-        {
-            get { return (Style)GetValue(OldContentStyleProperty); }
-            set { SetValue(OldContentStyleProperty, value); }
-        }
-
+        /// <summary>
+        /// </summary>
         public static readonly DependencyProperty OldContentStyleProperty =
-            DependencyProperty.Register("OldContentStyle", 
-                typeof(Style), 
-                typeof(StoryboardTransition), 
+            DependencyProperty.Register("OldContentStyle",
+                typeof(Style),
+                typeof(StoryboardTransition),
                 new UIPropertyMetadata(null));
-        
 
-        public Storyboard OldContentStoryboard
-        {
-            get { return (Storyboard)GetValue(OldContentStoryboardProperty); }
-            set { SetValue(OldContentStoryboardProperty, value); }
-        }
-
+        /// <summary>
+        /// </summary>
         public static readonly DependencyProperty OldContentStoryboardProperty =
-           DependencyProperty.Register("OldContentStoryboard",
-               typeof(Storyboard),
-               typeof(StoryboardTransition),
-               new UIPropertyMetadata(null));
+            DependencyProperty.Register("OldContentStoryboard",
+                typeof(Storyboard),
+                typeof(StoryboardTransition),
+                new UIPropertyMetadata(null));
 
-        public Style NewContentStyle
-        {
-            get { return (Style)GetValue(NewContentStyleProperty); }
-            set { SetValue(NewContentStyleProperty, value); }
-        }
-
+        /// <summary>
+        /// </summary>
         public static readonly DependencyProperty NewContentStyleProperty =
             DependencyProperty.Register("NewContentStyle",
                 typeof(Style),
                 typeof(StoryboardTransition),
                 new UIPropertyMetadata(null));
 
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty NewContentStoryboardProperty =
+            DependencyProperty.Register("NewContentStoryboard",
+                typeof(Storyboard),
+                typeof(StoryboardTransition),
+                new UIPropertyMetadata(null));
+
+        /// <summary>
+        /// </summary>
+        public Style OldContentStyle
+        {
+            get { return (Style) GetValue(OldContentStyleProperty); }
+            set { SetValue(OldContentStyleProperty, value); }
+        }
+
+
+        /// <summary>
+        /// </summary>
+        public Storyboard OldContentStoryboard
+        {
+            get { return (Storyboard) GetValue(OldContentStoryboardProperty); }
+            set { SetValue(OldContentStoryboardProperty, value); }
+        }
+
+        /// <summary>
+        /// </summary>
+        public Style NewContentStyle
+        {
+            get { return (Style) GetValue(NewContentStyleProperty); }
+            set { SetValue(NewContentStyleProperty, value); }
+        }
+
+        /// <summary>
+        /// </summary>
         public Storyboard NewContentStoryboard
         {
-            get { return (Storyboard)GetValue(NewContentStoryboardProperty); }
+            get { return (Storyboard) GetValue(NewContentStoryboardProperty); }
             set { SetValue(NewContentStoryboardProperty, value); }
         }
 
-        public static readonly DependencyProperty NewContentStoryboardProperty =
-            DependencyProperty.Register("NewContentStoryboard", 
-                typeof(Storyboard), 
-                typeof(StoryboardTransition), 
-                new UIPropertyMetadata(null));
-
-
-        protected internal override void BeginTransition(TransitionElement transitionElement, ContentPresenter oldContent, ContentPresenter newContent)
+        /// <summary>
+        /// </summary>
+        /// <param name="transitionElement"></param>
+        /// <param name="oldContent"></param>
+        /// <param name="newContent"></param>
+        protected internal override void BeginTransition(TransitionElement transitionElement,
+            ContentPresenter oldContent, ContentPresenter newContent)
         {
-            Storyboard oldStoryboard = OldContentStoryboard;
-            Storyboard newStoryboard = NewContentStoryboard;
+            var oldStoryboard = OldContentStoryboard;
+            var newStoryboard = NewContentStoryboard;
 
             if (oldStoryboard != null || newStoryboard != null)
             {
@@ -84,7 +107,7 @@ namespace Transitionals.Transitions
                 newContent.Style = NewContentStyle;
 
                 // Flag to determine when both storyboards are done
-                bool done = oldStoryboard == null || newStoryboard == null;
+                var done = oldStoryboard == null || newStoryboard == null;
 
                 if (oldStoryboard != null)
                 {
@@ -99,18 +122,16 @@ namespace Transitionals.Transitions
                     oldStoryboard.Begin(oldContent, true);
                 }
 
-                if (newStoryboard != null)
+                if (newStoryboard == null) return;
+                newStoryboard = newStoryboard.Clone();
+                newContent.SetValue(NewContentStoryboardProperty, newStoryboard);
+                newStoryboard.Completed += delegate
                 {
-                    newStoryboard = newStoryboard.Clone();
-                    newContent.SetValue(NewContentStoryboardProperty, newStoryboard);
-                    newStoryboard.Completed += delegate
-                    {
-                        if (done)
-                            EndTransition(transitionElement, oldContent, newContent);
-                        done = true;
-                    };
-                    newStoryboard.Begin(newContent, true);
-                }
+                    if (done)
+                        EndTransition(transitionElement, oldContent, newContent);
+                    done = true;
+                };
+                newStoryboard.Begin(newContent, true);
             }
             else
             {
@@ -118,17 +139,17 @@ namespace Transitionals.Transitions
             }
         }
 
-        protected override void OnTransitionEnded(TransitionElement transitionElement, ContentPresenter oldContent, ContentPresenter newContent)
+        /// <inheritdoc />
+        protected override void OnTransitionEnded(TransitionElement transitionElement, ContentPresenter oldContent,
+            ContentPresenter newContent)
         {
-            Storyboard oldStoryboard = (Storyboard)oldContent.GetValue(OldContentStoryboardProperty);
-            if (oldStoryboard != null)
-                oldStoryboard.Stop(oldContent);
-            oldContent.ClearValue(ContentPresenter.StyleProperty);
+            var oldStoryboard = (Storyboard) oldContent.GetValue(OldContentStoryboardProperty);
+            oldStoryboard?.Stop(oldContent);
+            oldContent.ClearValue(FrameworkElement.StyleProperty);
 
-            Storyboard newStoryboard = (Storyboard)newContent.GetValue(NewContentStoryboardProperty);
-            if (newStoryboard != null)
-                newStoryboard.Stop(newContent);
-            newContent.ClearValue(ContentPresenter.StyleProperty);
+            var newStoryboard = (Storyboard) newContent.GetValue(NewContentStoryboardProperty);
+            newStoryboard?.Stop(newContent);
+            newContent.ClearValue(FrameworkElement.StyleProperty);
         }
     }
 }

@@ -1,58 +1,78 @@
-#region License Revision: 0 Last Revised: 3/29/2006 8:21 AM
-/******************************************************************************
-Copyright (c) Microsoft Corporation.  All rights reserved.
+//  _____                     _ _   _                   _     
+// /__   \_ __ __ _ _ __  ___(_) |_(_) ___  _ __   __ _| |___ 
+//   / /\/ '__/ _` | '_ \/ __| | __| |/ _ \| '_ \ / _` | / __|
+//  / /  | | | (_| | | | \__ \ | |_| | (_) | | | | (_| | \__ \
+//  \/   |_|  \__,_|_| |_|___/_|\__|_|\___/|_| |_|\__,_|_|___/
+//                                                            
+// Module   : Transitionals/Transitionals/ExplosionTransition.cs
+// Name     : Adrian Hum - adrianhum 
+// Created  : 2017-09-23-11:00 AM
+// Modified : 2017-11-10-7:45 AM
 
-
-This file is licensed under the Microsoft Public License (Ms-PL). A copy of the Ms-PL should accompany this file. 
-If it does not, you can obtain a copy from: 
-
-http://www.microsoft.com/resources/sharedsource/licensingbasics/publiclicense.mspx
-******************************************************************************/
-#endregion // License
 using System;
+using System.ComponentModel;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Media3D;
-using System.Windows.Input;
 using System.Windows.Threading;
 using Transitionals.Controls;
-using System.ComponentModel;
 
 namespace Transitionals.Transitions
 {
-    [System.Runtime.InteropServices.ComVisible(false)]
+    /// <inheritdoc />
+    /// <summary>
+    /// </summary>
+    [ComVisible(false)]
     public class ExplosionTransition : Transition3D
     {
+        /// <summary>
+        /// </summary>
+        public static readonly DependencyProperty MouseAsCenterProperty =
+            DependencyProperty.Register("UseMouseLocation", typeof(bool), typeof(ExplosionTransition),
+                new UIPropertyMetadata(false));
+
         static ExplosionTransition()
         {
-            AcceptsNullContentProperty.OverrideMetadata(typeof(ExplosionTransition), new FrameworkPropertyMetadata(NullContentSupport.New));
+            AcceptsNullContentProperty.OverrideMetadata(typeof(ExplosionTransition),
+                new FrameworkPropertyMetadata(NullContentSupport.New));
             ClipToBoundsProperty.OverrideMetadata(typeof(ExplosionTransition), new FrameworkPropertyMetadata(true));
         }
 
+        /// <summary>
+        /// </summary>
         public ExplosionTransition()
         {
-            this.Duration = new Duration(TimeSpan.FromSeconds(1));
+            Duration = new Duration(TimeSpan.FromSeconds(1));
         }
 
+        /// <summary>
+        /// </summary>
         [DefaultValue(false)]
         public bool MouseAsCenter
         {
-            get { return (bool)GetValue(MouseAsCenterProperty); }
+            get { return (bool) GetValue(MouseAsCenterProperty); }
             set { SetValue(MouseAsCenterProperty, value); }
         }
 
-        public static readonly DependencyProperty MouseAsCenterProperty =
-            DependencyProperty.Register("UseMouseLocation", typeof(bool), typeof(ExplosionTransition), new UIPropertyMetadata(false));
-
-        protected override void BeginTransition3D(TransitionElement transitionElement, ContentPresenter oldContent, ContentPresenter newContent, Viewport3D viewport)
+        /// <inheritdoc />
+        /// <summary>
+        /// </summary>
+        /// <param name="transitionElement"></param>
+        /// <param name="oldContent"></param>
+        /// <param name="newContent"></param>
+        /// <param name="viewport"></param>
+        protected override void BeginTransition3D(TransitionElement transitionElement, ContentPresenter oldContent,
+            ContentPresenter newContent, Viewport3D viewport)
         {
-            Size size = transitionElement.RenderSize;
+            var size = transitionElement.RenderSize;
 
             Point3D centerPoint;
             if (MouseAsCenter)
             {
-                Point mouse2D = Mouse.GetPosition(transitionElement);
+                var mouse2D = Mouse.GetPosition(transitionElement);
                 centerPoint = new Point3D(mouse2D.X, mouse2D.Y, 0.5 * size.Width);
             }
             else
@@ -63,91 +83,85 @@ namespace Transitionals.Transitions
             int xparticles = 10, yparticles = 10;
 
             if (size.Width > size.Height)
-            {
-                yparticles = (int)(xparticles * size.Height / size.Width);
-            }
+                yparticles = (int) (xparticles * size.Height / size.Width);
             else
-            {
-                xparticles = (int)(yparticles * size.Width / size.Height);
-            }
+                xparticles = (int) (yparticles * size.Width / size.Height);
 
             double sx = 1.0 / xparticles, sy = 1.0 / yparticles;
-            Vector3D u = new Vector3D(size.Width * sx, 0, 0);
-            Vector3D v = new Vector3D(0, size.Height * sy, 0);
-            Brush cloneBrush = CreateBrush(oldContent);
+            var u = new Vector3D(size.Width * sx, 0, 0);
+            var v = new Vector3D(0, size.Height * sy, 0);
+            var cloneBrush = CreateBrush(oldContent);
             Material clone = new DiffuseMaterial(cloneBrush);
 
-            Vector3D[] velocities = new Vector3D[xparticles * yparticles];
-            Vector3D[] angularVelocities = new Vector3D[xparticles * yparticles];
-            Point3D[] centers = new Point3D[xparticles * yparticles];
+            var velocities = new Vector3D[xparticles * yparticles];
+            var angularVelocities = new Vector3D[xparticles * yparticles];
+            var centers = new Point3D[xparticles * yparticles];
 
-            Point3DCollection positions = new Point3DCollection(4 * xparticles * yparticles);
-            PointCollection textures = new PointCollection(4 * xparticles * yparticles);
-            Int32Collection triangles = new Int32Collection(6 * xparticles * yparticles);
-            int n = 0;
-            for (int i = 0; i < xparticles; i++)
+            var positions = new Point3DCollection(4 * xparticles * yparticles);
+            var textures = new PointCollection(4 * xparticles * yparticles);
+            var triangles = new Int32Collection(6 * xparticles * yparticles);
+            var n = 0;
+            for (var i = 0; i < xparticles; i++)
+            for (var j = 0; j < yparticles; j++)
             {
-                for (int j = 0; j < yparticles; j++)
-                {
-                    Point3D topleft = (Point3D)(i * u + j * v);
-                    positions.Add(topleft);
-                    positions.Add(topleft + u);
-                    positions.Add(topleft + u + v);
-                    positions.Add(topleft + v);
+                var topleft = (Point3D) (i * u + j * v);
+                positions.Add(topleft);
+                positions.Add(topleft + u);
+                positions.Add(topleft + u + v);
+                positions.Add(topleft + v);
 
-                    textures.Add(new Point(i * sx, j * sy));
-                    textures.Add(new Point((i + 1) * sx, j * sy));
-                    textures.Add(new Point((i + 1) * sx, (j + 1) * sy));
-                    textures.Add(new Point(i * sx, (j + 1) * sy));
+                textures.Add(new Point(i * sx, j * sy));
+                textures.Add(new Point((i + 1) * sx, j * sy));
+                textures.Add(new Point((i + 1) * sx, (j + 1) * sy));
+                textures.Add(new Point(i * sx, (j + 1) * sy));
 
 
-                    triangles.Add(n);
-                    triangles.Add(n + 2);
-                    triangles.Add(n + 1);
+                triangles.Add(n);
+                triangles.Add(n + 2);
+                triangles.Add(n + 1);
 
-                    triangles.Add(n);
-                    triangles.Add(n + 3);
-                    triangles.Add(n + 2);
+                triangles.Add(n);
+                triangles.Add(n + 3);
+                triangles.Add(n + 2);
 
-                    Vector3D f0 = positions[n] - centerPoint;
-                    Vector3D f1 = positions[n + 1] - centerPoint;
-                    Vector3D f2 = positions[n + 2] - centerPoint;
-                    Vector3D f3 = positions[n + 3] - centerPoint;
+                var f0 = positions[n] - centerPoint;
+                var f1 = positions[n + 1] - centerPoint;
+                var f2 = positions[n + 2] - centerPoint;
+                var f3 = positions[n + 3] - centerPoint;
 
-                    f0 = f0 / f0.LengthSquared;
-                    f1 = f1 / f1.LengthSquared;
-                    f2 = f2 / f2.LengthSquared;
-                    f3 = f3 / f3.LengthSquared;
+                f0 = f0 / f0.LengthSquared;
+                f1 = f1 / f1.LengthSquared;
+                f2 = f2 / f2.LengthSquared;
+                f3 = f3 / f3.LengthSquared;
 
-                    velocities[n / 4] = 2 * size.Width * (f0 + f1 + f2 + f3);
+                velocities[n / 4] = 2 * size.Width * (f0 + f1 + f2 + f3);
 
-                    Point3D center = centers[n / 4] = (Point3D)((i + 0.5) * u + (j + 0.5) * v);
-                    angularVelocities[n / 4] = 200 * (Vector3D.CrossProduct(f0, positions[n] - center) +
-                        Vector3D.CrossProduct(f1, positions[n + 1] - center) +
-                        Vector3D.CrossProduct(f2, positions[n + 2] - center) +
-                        Vector3D.CrossProduct(f3, positions[n + 3] - center));
+                var center = centers[n / 4] = (Point3D) ((i + 0.5) * u + (j + 0.5) * v);
+                angularVelocities[n / 4] = 200 * (Vector3D.CrossProduct(f0, positions[n] - center) +
+                                                  Vector3D.CrossProduct(f1, positions[n + 1] - center) +
+                                                  Vector3D.CrossProduct(f2, positions[n + 2] - center) +
+                                                  Vector3D.CrossProduct(f3, positions[n + 3] - center));
 
-                    n += 4;
-                }
+                n += 4;
             }
 
-            MeshGeometry3D mesh = new MeshGeometry3D();
-            mesh.Positions = positions;
-            mesh.TextureCoordinates = textures;
-            mesh.TriangleIndices = triangles;
+            var mesh = new MeshGeometry3D
+            {
+                Positions = positions,
+                TextureCoordinates = textures,
+                TriangleIndices = triangles
+            };
 
-            GeometryModel3D geometryModel = new GeometryModel3D(mesh, clone);
-            geometryModel.BackMaterial = clone;
-            ModelVisual3D model = new ModelVisual3D();
-            model.Content = geometryModel;
+            var geometryModel = new GeometryModel3D(mesh, clone) {BackMaterial = clone};
+            var model = new ModelVisual3D {Content = geometryModel};
 
             // Replace old content in visual tree with new 3d model
             transitionElement.HideContent(oldContent);
             viewport.Children.Add(model);
 
-            DispatcherTimer timer = new DispatcherTimer();
-            int t = 0;
-            double opacityDelta = 1.0 / (Duration.TimeSpan.Seconds * 60.0);
+            var timer = new DispatcherTimer();
+            var t = 0;
+            var opacityDelta = 1.0 / (Duration.TimeSpan.Seconds * 60.0);
             timer.Interval = TimeSpan.FromSeconds(1.0 / 60.0);
             timer.Tick += delegate
             {
@@ -160,11 +174,11 @@ namespace Transitionals.Transitions
                     return;
                 }
                 mesh.Positions = null;
-                AxisAngleRotation3D axisAngle = new AxisAngleRotation3D();
-                RotateTransform3D rotation = new RotateTransform3D(axisAngle, new Point3D());
-                for (int i = 0; i < positions.Count; i += 4)
+                var axisAngle = new AxisAngleRotation3D();
+                var rotation = new RotateTransform3D(axisAngle, new Point3D());
+                for (var i = 0; i < positions.Count; i += 4)
                 {
-                    Vector3D velocity = velocities[i / 4];
+                    var velocity = velocities[i / 4];
 
                     axisAngle.Axis = angularVelocities[i / 4];
                     axisAngle.Angle = angularVelocities[i / 4].Length;
@@ -181,7 +195,7 @@ namespace Transitionals.Transitions
                 }
                 mesh.Positions = positions;
             };
-            timer.Start();            
+            timer.Start();
         }
     }
 }

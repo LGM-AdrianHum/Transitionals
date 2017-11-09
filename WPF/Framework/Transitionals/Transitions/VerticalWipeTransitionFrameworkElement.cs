@@ -7,28 +7,26 @@
 // Module   : Transitionals/Transitionals/VerticalWipeTransitionFrameworkElement.cs
 // Name     : Adrian Hum - adrianhum 
 // Created  : 2017-11-09-2:24 PM
-// Modified : 2017-11-09-2:24 PM
+// Modified : 2017-11-10-7:46 AM
 
 using System.Runtime.InteropServices;
 using System.Windows;
 
 namespace Transitionals.Transitions
 {
-	
-
-	/// <inheritdoc cref="FrameworkElement" />
-	/// <summary>
-	///     Stores the XAML that defines the VerticalWipeTransition
-	/// </summary>
-	[ComVisible(false)]
-	public partial class VerticalWipeTransitionFrameworkElement
-	{
-		/// <inheritdoc />
-		/// <summary>
-		/// </summary>
-		public VerticalWipeTransitionFrameworkElement()
-		{
-			InitializeComponent();
-		}
-	}
+    /// <inheritdoc cref="FrameworkElement" />
+    /// <summary>
+    ///     Stores the XAML that defines the VerticalWipeTransition
+    /// </summary>
+    [ComVisible(false)]
+    public partial class VerticalWipeTransitionFrameworkElement
+    {
+        /// <inheritdoc />
+        /// <summary>
+        /// </summary>
+        public VerticalWipeTransitionFrameworkElement()
+        {
+            InitializeComponent();
+        }
+    }
 }

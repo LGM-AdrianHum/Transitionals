@@ -1,18 +1,18 @@
-#region License Revision: 0 Last Revised: 3/29/2006 8:21 AM
-/******************************************************************************
-Copyright (c) Microsoft Corporation.  All rights reserved.
+//  _____                     _ _   _                   _     
+// /__   \_ __ __ _ _ __  ___(_) |_(_) ___  _ __   __ _| |___ 
+//   / /\/ '__/ _` | '_ \/ __| | __| |/ _ \| '_ \ / _` | / __|
+//  / /  | | | (_| | | | \__ \ | |_| | (_) | | | | (_| | \__ \
+//  \/   |_|  \__,_|_| |_|___/_|\__|_|\___/|_| |_|\__,_|_|___/
+//                                                            
+// Module   : Transitionals/Transitionals/RollTransition.xaml.cs
+// Name     : Adrian Hum - adrianhum 
+// Created  : 2017-09-23-11:00 AM
+// Modified : 2017-11-10-7:45 AM
 
-
-This file is licensed under the Microsoft Public License (Ms-PL). A copy of the Ms-PL should accompany this file. 
-If it does not, you can obtain a copy from: 
-
-http://www.microsoft.com/resources/sharedsource/licensingbasics/publiclicense.mspx
-******************************************************************************/
-#endregion // License
 using System;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Media.Animation;
-using System.Runtime.InteropServices;
 
 namespace Transitionals.Transitions
 {
@@ -34,28 +34,27 @@ namespace Transitionals.Transitions
     [ComVisible(false)]
     public class RollTransition : StoryboardTransition
     {
-        private static RollTransitionFrameworkElement frameworkElement = new RollTransitionFrameworkElement();
+        private static readonly RollTransitionFrameworkElement frameworkElement = new RollTransitionFrameworkElement();
 
         static RollTransition()
         {
-            AcceptsNullContentProperty.OverrideMetadata(typeof(RollTransition), new FrameworkPropertyMetadata(NullContentSupport.New));
+            AcceptsNullContentProperty.OverrideMetadata(typeof(RollTransition),
+                new FrameworkPropertyMetadata(NullContentSupport.New));
             IsNewContentTopmostProperty.OverrideMetadata(typeof(RollTransition), new FrameworkPropertyMetadata(false));
             ClipToBoundsProperty.OverrideMetadata(typeof(RollTransition), new FrameworkPropertyMetadata(true));
         }
 
         public RollTransition()
         {
-            this.OldContentStyle = (Style)frameworkElement.FindResource("RollTransitionOldContentStyle");
-            this.OldContentStoryboard = (Storyboard)frameworkElement.FindResource("RollTransitionOldContentStoryboard");
-            this.Duration = new Duration(TimeSpan.FromSeconds(0.5));
+            OldContentStyle = (Style) frameworkElement.FindResource("RollTransitionOldContentStyle");
+            OldContentStoryboard = (Storyboard) frameworkElement.FindResource("RollTransitionOldContentStoryboard");
+            Duration = new Duration(TimeSpan.FromSeconds(0.5));
         }
 
         protected override void OnDurationChanged(Duration oldDuration, Duration newDuration)
         {
-            if (this.OldContentStoryboard != null && this.OldContentStoryboard.Children.Count > 0)
-            {
-                this.OldContentStoryboard.Children[0].Duration = newDuration;
-            }
+            if (OldContentStoryboard != null && OldContentStoryboard.Children.Count > 0)
+                OldContentStoryboard.Children[0].Duration = newDuration;
         }
     }
 }

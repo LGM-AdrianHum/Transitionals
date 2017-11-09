@@ -1,18 +1,18 @@
-#region License Revision: 0 Last Revised: 3/29/2006 8:21 AM
-/******************************************************************************
-Copyright (c) Microsoft Corporation.  All rights reserved.
+//  _____                     _ _   _                   _     
+// /__   \_ __ __ _ _ __  ___(_) |_(_) ___  _ __   __ _| |___ 
+//   / /\/ '__/ _` | '_ \/ __| | __| |/ _ \| '_ \ / _` | / __|
+//  / /  | | | (_| | | | \__ \ | |_| | (_) | | | | (_| | \__ \
+//  \/   |_|  \__,_|_| |_|___/_|\__|_|\___/|_| |_|\__,_|_|___/
+//                                                            
+// Module   : Transitionals/Transitionals/RotateWipeTransition.xaml.cs
+// Name     : Adrian Hum - adrianhum 
+// Created  : 2017-09-23-11:00 AM
+// Modified : 2017-11-10-7:45 AM
 
-
-This file is licensed under the Microsoft Public License (Ms-PL). A copy of the Ms-PL should accompany this file. 
-If it does not, you can obtain a copy from: 
-
-http://www.microsoft.com/resources/sharedsource/licensingbasics/publiclicense.mspx
-******************************************************************************/
-#endregion // License
 using System;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Media.Animation;
-using System.Runtime.InteropServices;
 
 namespace Transitionals.Transitions
 {
@@ -34,21 +34,21 @@ namespace Transitionals.Transitions
     [ComVisible(false)]
     public class RotateWipeTransition : StoryboardTransition
     {
-        private static RotateWipeTransitionFrameworkElement frameworkElement = new RotateWipeTransitionFrameworkElement();
+        private static readonly RotateWipeTransitionFrameworkElement frameworkElement =
+            new RotateWipeTransitionFrameworkElement();
 
         public RotateWipeTransition()
         {
-            this.NewContentStyle = (Style)frameworkElement.FindResource("RotateWipeTransitionNewContentStyle");
-            this.NewContentStoryboard = (Storyboard)frameworkElement.FindResource("RotateWipeTransitionNewContentStoryboard");
-            this.Duration = new Duration(TimeSpan.FromSeconds(0.5));
+            NewContentStyle = (Style) frameworkElement.FindResource("RotateWipeTransitionNewContentStyle");
+            NewContentStoryboard =
+                (Storyboard) frameworkElement.FindResource("RotateWipeTransitionNewContentStoryboard");
+            Duration = new Duration(TimeSpan.FromSeconds(0.5));
         }
 
         protected override void OnDurationChanged(Duration oldDuration, Duration newDuration)
         {
-            if (this.NewContentStoryboard != null && this.NewContentStoryboard.Children.Count > 0)
-            {
-                this.NewContentStoryboard.Children[0].Duration = newDuration;
-            }
+            if (NewContentStoryboard != null && NewContentStoryboard.Children.Count > 0)
+                NewContentStoryboard.Children[0].Duration = newDuration;
         }
     }
 }

@@ -10,33 +10,32 @@ http://www.microsoft.com/resources/sharedsource/licensingbasics/publiclicense.ms
 *******************************************************************************
 License -->
 <FrameworkElement x:Class="Transitionals.Transitions.FadeAndBlurTransitionFrameworkElement"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    >
-  <FrameworkElement.Resources>
-    <Style x:Key="FadeAndBlurTransitionOldContentStyle" TargetType="ContentPresenter">
-      <Setter Property="BitmapEffect">
-        <Setter.Value>
-          <BlurBitmapEffect Radius="0"/>
-        </Setter.Value>
-      </Setter>
-    </Style>
-    <Style x:Key="FadeAndBlurTransitionNewContentStyle" TargetType="ContentPresenter">
-      <Setter Property="RenderTransformOrigin" Value="0.5, 0.5"/>
-      <Setter Property="RenderTransform">
-        <Setter.Value>
-          <ScaleTransform ScaleX="1" ScaleY="1"/>
-        </Setter.Value>
-      </Setter>
-    </Style>
-    <Storyboard x:Key="FadeAndBlurTransitionOldContentStoryboard">
-      <DoubleAnimation Storyboard.TargetProperty="BitmapEffect.Radius" From="0" To="5" Duration="0:0:1"/>
-      <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:1"/>
-    </Storyboard>
-    <Storyboard x:Key="FadeAndBlurTransitionNewContentStoryboard">
-      <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.5"/>
-      <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From="0.8" To="1" Duration="0:0:0.5"/>
-      <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" From="0.8" To="1" Duration="0:0:0.5"/>
-    </Storyboard>
-  </FrameworkElement.Resources>
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <FrameworkElement.Resources>
+        <Style x:Key="FadeAndBlurTransitionOldContentStyle" TargetType="ContentPresenter">
+            <Setter Property="BitmapEffect">
+                <Setter.Value>
+                    <BlurBitmapEffect Radius="0" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="FadeAndBlurTransitionNewContentStyle" TargetType="ContentPresenter">
+            <Setter Property="RenderTransformOrigin" Value="0.5, 0.5" />
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="1" ScaleY="1" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Storyboard x:Key="FadeAndBlurTransitionOldContentStoryboard">
+            <DoubleAnimation Storyboard.TargetProperty="BitmapEffect.Radius" From="0" To="5" Duration="0:0:1" />
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:1" />
+        </Storyboard>
+        <Storyboard x:Key="FadeAndBlurTransitionNewContentStoryboard">
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.5" />
+            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From="0.8" To="1" Duration="0:0:0.5" />
+            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" From="0.8" To="1" Duration="0:0:0.5" />
+        </Storyboard>
+    </FrameworkElement.Resources>
 </FrameworkElement>

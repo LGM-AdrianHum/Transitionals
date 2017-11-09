@@ -10,25 +10,24 @@ http://www.microsoft.com/resources/sharedsource/licensingbasics/publiclicense.ms
 *******************************************************************************
 License -->
 <FrameworkElement x:Class="Transitionals.Transitions.RotateWipeTransitionFrameworkElement"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    >
-  <FrameworkElement.Resources>
-    <Style x:Key="RotateWipeTransitionNewContentStyle" TargetType="ContentPresenter">
-      <Setter Property="OpacityMask">
-        <Setter.Value>
-          <LinearGradientBrush EndPoint="1,0">
-            <LinearGradientBrush.Transform>
-              <RotateTransform Angle="10"/>
-            </LinearGradientBrush.Transform>
-            <GradientStop Offset="0" Color="White"/>
-            <GradientStop Offset="0.1" />
-          </LinearGradientBrush>
-        </Setter.Value>
-      </Setter>
-    </Style>
-    <Storyboard x:Key="RotateWipeTransitionNewContentStoryboard">
-      <DoubleAnimation Storyboard.TargetProperty="OpacityMask.Transform.Angle" To="-90"/>
-    </Storyboard>
-  </FrameworkElement.Resources>
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <FrameworkElement.Resources>
+        <Style x:Key="RotateWipeTransitionNewContentStyle" TargetType="ContentPresenter">
+            <Setter Property="OpacityMask">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="1,0">
+                        <LinearGradientBrush.Transform>
+                            <RotateTransform Angle="10" />
+                        </LinearGradientBrush.Transform>
+                        <GradientStop Offset="0" Color="White" />
+                        <GradientStop Offset="0.1" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Storyboard x:Key="RotateWipeTransitionNewContentStoryboard">
+            <DoubleAnimation Storyboard.TargetProperty="OpacityMask.Transform.Angle" To="-90" />
+        </Storyboard>
+    </FrameworkElement.Resources>
 </FrameworkElement>

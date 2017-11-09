@@ -10,23 +10,23 @@ http://www.microsoft.com/resources/sharedsource/licensingbasics/publiclicense.ms
 *******************************************************************************
 License -->
 <FrameworkElement x:Class="Transitionals.Transitions.VerticalBlindsTransitionFrameworkElement"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    >
-  <FrameworkElement.Resources>
-    <Style x:Key="VerticalBlindsTransitionNewContentStyle" TargetType="ContentPresenter">
-      <Setter Property="OpacityMask">
-        <Setter.Value>
-          <LinearGradientBrush MappingMode="Absolute" SpreadMethod="Repeat" StartPoint="0,0" EndPoint="30,0">
-            <GradientStop Color="White"/>
-            <GradientStop/>
-          </LinearGradientBrush>
-        </Setter.Value>
-      </Setter>
-    </Style>
-    <Storyboard x:Key="VerticalBlindsTransitionNewContentStoryboard">
-      <DoubleAnimation Storyboard.TargetProperty="OpacityMask.GradientStops[0].Offset" To="1" Duration="0:0:0.5" BeginTime="0:0:0.2"/>
-      <DoubleAnimation Storyboard.TargetProperty="OpacityMask.GradientStops[1].Offset" To="1" Duration="0:0:0.5"/>
-    </Storyboard>
-  </FrameworkElement.Resources>
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <FrameworkElement.Resources>
+        <Style x:Key="VerticalBlindsTransitionNewContentStyle" TargetType="ContentPresenter">
+            <Setter Property="OpacityMask">
+                <Setter.Value>
+                    <LinearGradientBrush MappingMode="Absolute" SpreadMethod="Repeat" StartPoint="0,0" EndPoint="30,0">
+                        <GradientStop Color="White" />
+                        <GradientStop />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Storyboard x:Key="VerticalBlindsTransitionNewContentStoryboard">
+            <DoubleAnimation Storyboard.TargetProperty="OpacityMask.GradientStops[0].Offset" To="1" Duration="0:0:0.5"
+                             BeginTime="0:0:0.2" />
+            <DoubleAnimation Storyboard.TargetProperty="OpacityMask.GradientStops[1].Offset" To="1" Duration="0:0:0.5" />
+        </Storyboard>
+    </FrameworkElement.Resources>
 </FrameworkElement>
