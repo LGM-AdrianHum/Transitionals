@@ -16,14 +16,14 @@ The Transitions library integrates into your WPF application at the XAML level. 
 
 Add a reference to the Transitionals.dll assembly to your project
 Add the appropriate XML namespaces to your WPF document:
-```
+```XML
 xmlns:trans="clr-namespace:Transitionals;assembly=Transitionals"
 xmlns:transc="clr-namespace:Transitionals.Controls;assembly=Transitionals"
 xmlns:transt="clr-namespace:Transitionals.Transitions;assembly=Transitionals"
 xmlns:refl="clr-namespace:System.Reflection;assembly=mscorlib"
 ```
 Add a TransitionElement object to the XAML of your window or user control that specifies the transformations you wantinside the TransitionElement.Transition property:
-```
+```XAML
 <transc:TransitionElement x:Name="TransitionBox">
     <transc:TransitionElement.Transition>
         <transt:RotateTransition Angle="45" />
@@ -31,7 +31,7 @@ Add a TransitionElement object to the XAML of your window or user control that s
 </transc:TransitionElement>
 ```
 Alternatively, you can set the TransactionElement.TransactionSelector property to something like the built-in RandomTransitionSelector class to choose between a set of your favorite Transitions:
-```
+```XAML
 <transc:TransitionElement x:Name="TransitionBox">
     <transc:TransitionElement.TransitionSelector>
         <trans:RandomTransitionSelector>
@@ -46,7 +46,7 @@ Alternatively, you can set the TransactionElement.TransactionSelector property t
 Now all that's left is to assign the pieces of content you want managed by the TransitionElement.  These go in the Content property as shown in this sample.  In this case, we've added 2 button controls (AButton and BButton) and are using their Button.Click events to swap between two separate User Controls:
 UserControlA userControlA = new UserControlA();
 UserControlB userControlB = new UserControlB();
-``` 
+```C#
 private void AButton_Click(object sender, RoutedEventArgs e)
 {
     TransitionBox.Content = userControlA;
