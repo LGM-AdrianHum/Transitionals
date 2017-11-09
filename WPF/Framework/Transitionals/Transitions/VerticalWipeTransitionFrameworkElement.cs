@@ -14,6 +14,8 @@ using System.Windows;
 
 namespace Transitionals.Transitions
 {
+	
+
 	/// <inheritdoc cref="FrameworkElement" />
 	/// <summary>
 	///     Stores the XAML that defines the VerticalWipeTransition
