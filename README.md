@@ -16,17 +16,22 @@ The Transitions library integrates into your WPF application at the XAML level. 
 
 Add a reference to the Transitionals.dll assembly to your project
 Add the appropriate XML namespaces to your WPF document:
+```
 xmlns:trans="clr-namespace:Transitionals;assembly=Transitionals"
 xmlns:transc="clr-namespace:Transitionals.Controls;assembly=Transitionals"
 xmlns:transt="clr-namespace:Transitionals.Transitions;assembly=Transitionals"
 xmlns:refl="clr-namespace:System.Reflection;assembly=mscorlib"
+```
 Add a TransitionElement object to the XAML of your window or user control that specifies the transformations you wantinside the TransitionElement.Transition property:
+```
 <transc:TransitionElement x:Name="TransitionBox">
     <transc:TransitionElement.Transition>
         <transt:RotateTransition Angle="45" />
     </transc:TransitionElement.Transition>
 </transc:TransitionElement>
+```
 Alternatively, you can set the TransactionElement.TransactionSelector property to something like the built-in RandomTransitionSelector class to choose between a set of your favorite Transitions:
+```
 <transc:TransitionElement x:Name="TransitionBox">
     <transc:TransitionElement.TransitionSelector>
         <trans:RandomTransitionSelector>
@@ -37,10 +42,11 @@ Alternatively, you can set the TransactionElement.TransactionSelector property t
         </trans:RandomTransitionSelector>
     </transc:TransitionElement.TransitionSelector>
 </TransitionElement>
+```
 Now all that's left is to assign the pieces of content you want managed by the TransitionElement.  These go in the Content property as shown in this sample.  In this case, we've added 2 button controls (AButton and BButton) and are using their Button.Click events to swap between two separate User Controls:
 UserControlA userControlA = new UserControlA();
 UserControlB userControlB = new UserControlB();
- 
+``` 
 private void AButton_Click(object sender, RoutedEventArgs e)
 {
     TransitionBox.Content = userControlA;
@@ -50,4 +56,5 @@ private void BButton_Click(object sender, RoutedEventArgs e)
 {
     TransitionBox.Content = userControlB;
 }
+```
 Presto!  When you run the application, the transition will take place when you click between the buttons.
