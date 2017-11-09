@@ -12,7 +12,6 @@ http://www.microsoft.com/resources/sharedsource/licensingbasics/publiclicense.ms
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Collections.ObjectModel;
 using System.Reflection;
@@ -20,6 +19,7 @@ using System.Diagnostics;
 
 namespace Transitionals
 {
+    /// <inheritdoc />
     /// <summary>
     /// A transition selector that randomly selects from a list of available transitions.
     /// </summary>
@@ -58,7 +58,7 @@ namespace Transitionals
 
         private static void OnTransitionAssembliesChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            RandomTransitionSelector selector = ((RandomTransitionSelector)d);
+            var selector = ((RandomTransitionSelector)d);
             selector.ResetAssembliesResolved();
             selector.OnTransitionAssembliesChanged(e);
         }
@@ -75,9 +75,9 @@ namespace Transitionals
         /************************************************
 		 * Member Variables
 		 ***********************************************/
-        private bool assembliesResolved = false;
-        private List<Transition> assemblyTransitions = new List<Transition>();
-        private Random random = new Random();
+        private bool _assembliesResolved;
+        private readonly List<Transition> _assemblyTransitions = new List<Transition>();
+        private readonly Random _random = new Random();
         #endregion // Member Variables
 
         #region Internal Methods
@@ -90,16 +90,16 @@ namespace Transitionals
         private void ResetAssembliesResolved()
         {
             // Clone current list of transitions
-            List<Transition> explicitTransitions = new List<Transition>(Transitions);
+            var explicitTransitions = new List<Transition>(Transitions);
 
             // Remove transitions that were added from assemblies
-            if (assemblyTransitions.Count > 0)
+            if (_assemblyTransitions.Count > 0)
             {
-                explicitTransitions.RemoveAll(t => assemblyTransitions.Contains(t));
+                explicitTransitions.RemoveAll(t => _assemblyTransitions.Contains(t));
             }
 
             // Clear list of transitions added by assemblies
-            assemblyTransitions.Clear();
+            _assemblyTransitions.Clear();
 
             // Set the list of transitions to whatever's left over.
             // This will be the list of all transitions that weren't loaded 
@@ -107,7 +107,7 @@ namespace Transitionals
             Transitions = new ObservableCollection<Transition>(explicitTransitions);
             
             // Mark assemblies as unresolved.
-            assembliesResolved = false;
+            _assembliesResolved = false;
         }
 
         /// <summary>
@@ -116,23 +116,23 @@ namespace Transitionals
         private void ResolveAssemblies()
         {
             // Get list of existing transitions
-            List<Transition> existingTransitions = Transitions.ToList<Transition>();
+            var existingTransitions = Transitions.ToList();
 
             // Placeholder for final list of transitions (explicit + loaded)
-            List<Transition> finalTransitions = new List<Transition>(existingTransitions);
+            var finalTransitions = new List<Transition>(existingTransitions);
 
             // For each assembly name
-            foreach (AssemblyName asmName in TransitionAssemblies)
+            foreach (var asmName in TransitionAssemblies)
             {
                 // Loading an assembly may fail and we don't want to skip 
                 // loading additional assemblies.
                 try
                 {
                     // Load the assembly from the name
-                    Assembly asm = Assembly.Load(asmName);
+                    var asm = Assembly.Load(asmName);
 
                     // Examine all types
-                    foreach (Type transitionType in asm.GetTypes())
+                    foreach (var transitionType in asm.GetTypes())
                     {
                         // Make sure type can be instantiated as a transition
                         if (!transitionType.IsCreatableAs<Transition>()) continue;
@@ -150,31 +150,26 @@ namespace Transitionals
                         try
                         {
                             // Create
-                            Transition transition = (Transition)Activator.CreateInstance(transitionType);
+                            var transition = (Transition)Activator.CreateInstance(transitionType);
 
                             // Add to the final list
                             finalTransitions.Add(transition);
 
                             // Add to list that indicates it was loaded from an assembly
-                            assemblyTransitions.Add(transition);
+                            _assemblyTransitions.Add(transition);
                         }
                         catch (Exception ex)
                         {
-                            if (TraceSwitches.Transitions.TraceVerbose)
-                            {
-                                string msg = "Error loading transition '{0}'.\r\n\r\n{1}";
-                                Debug.WriteLine(string.Format(msg, transitionType.Name, ex.Message));
-                            }
+                            if (!TraceSwitches.Transitions.TraceVerbose) continue;
+                           
+                            Debug.WriteLine($"Error loading transition '{transitionType.Name}'.\r\n\r\n{ex.Message}");
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    if (TraceSwitches.Transitions.TraceVerbose)
-                    {
-                        string msg = "Error loading transition assembly '{0}'.\r\n\r\n{1}";
-                        Debug.WriteLine(string.Format(msg, asmName.Name, ex.Message));
-                    }
+                    if (!TraceSwitches.Transitions.TraceVerbose) continue;
+                    Debug.WriteLine($"Error loading transition assembly '{asmName.Name}'.\r\n\r\n{ex.Message}");
                 }
             }
 
@@ -182,7 +177,7 @@ namespace Transitionals
             Transitions = new ObservableCollection<Transition>(finalTransitions);
 
             // Assemblies are resolved
-            assembliesResolved = true;
+            _assembliesResolved = true;
         }
         #endregion // Internal Methods
 
@@ -190,8 +185,9 @@ namespace Transitionals
         /************************************************
 		 * Overrides / Event Handlers
 		 ***********************************************/
+        /// <inheritdoc />
         /// <summary>
-        /// Returns a random <see cref="Transition"/> from the list of <see cref="Transitions"/>.
+        /// Returns a random <see cref="T:Transitionals.Transition" /> from the list of <see cref="P:Transitionals.RandomTransitionSelector.Transitions" />.
         /// </summary>
         /// <param name="oldContent">
         /// The old content that is currently displayed.
@@ -200,19 +196,19 @@ namespace Transitionals
         /// The new content that is to be displayed.
         /// </param>
         /// <returns>
-        /// The transition used to display the content or <see langword="null"/> if a 
+        /// The transition used to display the content or <see langword="null" /> if a 
         /// transition should not be used.
         /// </returns>
         public override Transition SelectTransition(object oldContent, object newContent)
         {
             // If assemblies haven't been resolved, resolve them
-            if (!assembliesResolved)
+            if (!_assembliesResolved)
             {
                 ResolveAssemblies();
             }
 
             // Get transition collection
-            ObservableCollection<Transition> transitions = Transitions;
+            var transitions = Transitions;
 
             // Placeholder for the transition
             Transition transition = null;
@@ -221,28 +217,29 @@ namespace Transitionals
             if ((transitions != null) && (transitions.Count > 0))
             {
                 // Select
-                transition = transitions[random.Next(0, transitions.Count)];
+                transition = transitions[_random.Next(0, transitions.Count)];
             }
 
             // Get duration
-            Duration transitionDuration = TransitionDuration;
+            var transitionDuration = TransitionDuration;
 
             // Update duration?
-            if ((transition != null) && (transitionDuration != Duration.Automatic))
-            {
-                // TODO: Fix transitions that throw an exception here.
+            if ((transition == null) || (transitionDuration == Duration.Automatic)) return transition;
+            // TODO: Fix transitions that throw an exception here.
 
-                // This catch is because back in Acropolis when the transitions were first 
-                // implemented, some transitions did not (and currently still do not) support 
-                // variable durations. The current implementation is to throw an exception, 
-                // which the block below will ignore.
-                try
-                {
-                    transition.Duration = transitionDuration;
-                }
-                catch { }
+            // This catch is because back in Acropolis when the transitions were first 
+            // implemented, some transitions did not (and currently still do not) support 
+            // variable durations. The current implementation is to throw an exception, 
+            // which the block below will ignore.
+            try
+            {
+                transition.Duration = transitionDuration;
             }
-            
+            catch
+            {
+                // ignored
+            }
+
             // Return the transition (or lack thereof)
             return transition;
         }

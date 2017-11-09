@@ -16,5 +16,11 @@ namespace Transitionals.Tests
         {
 
         }
+
+        [Test()]
+        public void SelectTransitionTest1()
+        {
+
+        }
     }
 }
