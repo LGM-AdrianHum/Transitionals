@@ -18,7 +18,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransitionTester", "WPF\Sam
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageViewer", "WPF\Samples\ImageViewer\ImageViewer.csproj", "{A5F6B80E-9202-434A-BE07-093E2656C6AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlideShow", "..\SlideShow\SlideShow\SlideShow.csproj", "{752E4273-979C-40FC-9144-1602EF5A20B0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransitionalsTests", "WPF\Framework\TransitionalsTests\TransitionalsTests.csproj", "{7E6D5B82-C7DF-46EC-B569-2EF400811383}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,10 +38,10 @@ Global
 		{A5F6B80E-9202-434A-BE07-093E2656C6AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5F6B80E-9202-434A-BE07-093E2656C6AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5F6B80E-9202-434A-BE07-093E2656C6AA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{752E4273-979C-40FC-9144-1602EF5A20B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{752E4273-979C-40FC-9144-1602EF5A20B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{752E4273-979C-40FC-9144-1602EF5A20B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{752E4273-979C-40FC-9144-1602EF5A20B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E6D5B82-C7DF-46EC-B569-2EF400811383}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E6D5B82-C7DF-46EC-B569-2EF400811383}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E6D5B82-C7DF-46EC-B569-2EF400811383}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E6D5B82-C7DF-46EC-B569-2EF400811383}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
