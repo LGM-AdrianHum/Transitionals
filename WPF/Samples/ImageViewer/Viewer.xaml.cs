@@ -47,13 +47,17 @@ namespace ImageViewer
             try
             {
                 // Create the browser
-                System.Windows.Forms.FolderBrowserDialog fb = new System.Windows.Forms.FolderBrowserDialog();
+                System.Windows.Forms.FolderBrowserDialog fb =
+                    new System.Windows.Forms.FolderBrowserDialog
+                    {
+                        RootFolder = @"",
+                        Description =
+                            "Please select a folder that contains images to show.\r\nNote that very large images curently do not transition well on some machines."
+                    };
 
                 // Start in 'My Pictures'
-                fb.RootFolder = Environment.SpecialFolder.MyPictures;
 
                 // Set a nice title
-                fb.Description = "Please select a folder that contains images to show.\r\nNote that very large images curently do not transition well on some machines.";
 
                 // Show
                 if (fb.ShowDialog() == System.Windows.Forms.DialogResult.OK)

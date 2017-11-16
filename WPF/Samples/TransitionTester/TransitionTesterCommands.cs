@@ -19,23 +19,13 @@ namespace TransitionTester
     /// </summary>
     public static class TransitionTesterCommands
     {
-        private static RoutedUICommand about = null;
-        private static RoutedUICommand exit = null;
+        private static RoutedUICommand _about;
+        private static RoutedUICommand _exit;
 
         /// <summary>
         /// Provides a routed command for application about.
         /// </summary>
-        public static RoutedUICommand About
-        {
-            get
-            {
-                if (about == null)
-                {
-                    about = new RoutedUICommand("About", "About", typeof(TransitionTesterCommands));
-                }
-                return about;
-            }
-        }
+        public static RoutedUICommand About => _about ?? (_about = new RoutedUICommand("About", "About", typeof(TransitionTesterCommands)));
 
         /// <summary>
         /// Provides a routed command for application exit.
@@ -44,12 +34,10 @@ namespace TransitionTester
         {
             get
             {
-                if (exit == null)
-                {
-                    exit = new RoutedUICommand("Exit", "Exit", typeof(TransitionTesterCommands));
-                    exit.InputGestures.Add(new KeyGesture(Key.F4, ModifierKeys.Alt));
-                }
-                return exit;
+                if (_exit != null) return _exit;
+                _exit = new RoutedUICommand("Exit", "Exit", typeof(TransitionTesterCommands));
+                _exit.InputGestures.Add(new KeyGesture(Key.F4, ModifierKeys.Alt));
+                return _exit;
             }
         }
     }
